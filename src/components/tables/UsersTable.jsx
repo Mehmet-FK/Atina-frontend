@@ -13,6 +13,7 @@ import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useUsersCalls from "../../hooks/useUsersCalls";
+import ColumnSelect from "../ColumnSelect";
 
 const tableStyle = {
   th: {
@@ -39,7 +40,6 @@ const tableStyle = {
 };
 
 const tableColumns = [
-  "id",
   "firstname",
   "lastname",
   "username",
@@ -89,8 +89,12 @@ const UsersTable = () => {
     setFilterVal({});
     handlePagination();
   };
-
   // ===Table Filter END===
+
+  // === Column Select START ===
+  const [selectedColumns, setSelectedColumns] = useState(tableColumns);
+  // === Column Select END ===
+
   const { getUsersData } = useUsersCalls();
   useEffect(() => {
     getUsersData();
@@ -118,6 +122,11 @@ const UsersTable = () => {
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <ColumnSelect
+            tableColumns={tableColumns}
+            selectedColumns={selectedColumns}
+            setSelectedColumns={setSelectedColumns}
+          />
           <Pagination
             page={page}
             setPage={setPage}
@@ -129,7 +138,10 @@ const UsersTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {tableColumns.map((item, i) => (
+              <TableCell sx={tableStyle.th.cell} align="left">
+                ID
+              </TableCell>
+              {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}
                 </TableCell>
@@ -153,27 +165,39 @@ const UsersTable = () => {
                   >
                     {user?.id}
                   </TableCell>
-                  <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                    {user?.firstname}
-                  </TableCell>
-                  <TableCell sx={tableStyle.tr.cell} align="left">
-                    {user?.lastname}
-                  </TableCell>
-                  <TableCell sx={tableStyle.tr.cell} align="left">
-                    {user?.username}
-                  </TableCell>
-                  <TableCell sx={tableStyle.tr.cell} align="left">
-                    ********
-                  </TableCell>
-                  <TableCell sx={tableStyle.tr.cell} align="left">
-                    {user?.personnelnumber}
-                  </TableCell>
-                  <TableCell sx={tableStyle.tr.cell} align="left">
-                    <Avatar
-                      sx={tableStyle.tr.image}
-                      src={`data:image/png;base64,${user?.image}`}
-                    />
-                  </TableCell>
+                  {selectedColumns.includes("firstname") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
+                      {user?.firstname}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("lastname") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {user?.lastname}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("username") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {user?.username}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("password") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      ********
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("personnelnumber") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {user?.personnelnumber}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("image") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      <Avatar
+                        sx={tableStyle.tr.image}
+                        src={`data:image/png;base64,${user?.image}`}
+                      />
+                    </TableCell>
+                  )}
                 </TableRow>
               );
             })}
