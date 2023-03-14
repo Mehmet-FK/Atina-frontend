@@ -22,6 +22,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import useAtinaCalls from "../hooks/useAtinaCalls";
 import logo from "../assets/attensam-logo.svg";
+import { Tooltip } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -144,10 +145,13 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap component="div">
-            ATINA
-          </Typography> */}
-          <img style={{ width: "150px" }} src={logo} alt="logo" />
+
+          <img
+            style={{ width: "150px", cursor: "pointer" }}
+            onClick={() => navigate("")}
+            src={logo}
+            alt="logo"
+          />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -165,28 +169,30 @@ export default function Dashboard() {
         <List>
           {drawerList.map((item) => (
             <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-                onClick={() => navigate(item.nav)}
-              >
-                <ListItemIcon
+              <Tooltip title={item.text} placement="right" arrow>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
+                  onClick={() => navigate(item.nav)}
                 >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
+                </ListItemButton>
+              </Tooltip>
             </ListItem>
           ))}
         </List>

@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
-import BookingsFilter from "../BookingsFilter";
+
+import NfcFilter from "../NfcFilter";
 
 const tableStyle = {
   th: {
@@ -77,7 +78,7 @@ const NfcTable = () => {
   const [filterVal, setFilterVal] = useState({});
   console.log(filterVal);
   const handleFilter = () => {
-    const flag = Object.values(filterVal).some((x) => x !== "");
+    // const flag = Object.values(filterVal).some((x) => x !== "");
     // const filteredData = mobileBookings?.filter((item) =>
     //   flag
     //     ? item.id === parseInt(filterVal.id) ||
@@ -121,7 +122,7 @@ const NfcTable = () => {
 
   return (
     <>
-      <BookingsFilter
+      <NfcFilter
         handleReset={handleReset}
         handleFilter={handleFilter}
         filterVal={filterVal}
