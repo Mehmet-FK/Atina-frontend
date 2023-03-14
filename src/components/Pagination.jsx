@@ -1,15 +1,6 @@
 import TablePagination from "@mui/material/TablePagination";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 
-const Pagination = ({
-  page,
-  setPage,
-  rowsPerPage,
-  setRowsPerPage,
-  handlePagination,
-}) => {
-  const { AtinaUsers } = useSelector((state) => state.atina);
+const Pagination = ({ data, page, setPage, rowsPerPage, setRowsPerPage }) => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -24,7 +15,7 @@ const Pagination = ({
       showFirstButton={true}
       showLastButton={true}
       component="div"
-      count={AtinaUsers.length}
+      count={data.length}
       page={page}
       onPageChange={handleChangePage}
       rowsPerPage={rowsPerPage}

@@ -6,14 +6,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
-
-import { Avatar } from "@mui/material";
-import UsersFilter from "../UsersFilter";
+import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
+import BookingsFilter from "../BookingsFilter";
+import useSortColumn from "../../hooks/useSortColumn";
 
 const tableStyle = {
   th: {
@@ -26,7 +27,7 @@ const tableStyle = {
   tr: {
     cell: {
       fontSize: "0.8em",
-      padding: "5px",
+      padding: "10px",
     },
     image: {
       transition: "0.3s all",
@@ -40,46 +41,55 @@ const tableStyle = {
 };
 
 const tableColumns = [
-  "firstname",
-  "lastname",
-  "username",
-  "password",
-  "personnelnumber",
-  "image",
+  "datum",
+  "zeitpunkt",
+  "buchungstyp",
+  "straße",
+  "straßennummer",
+  "plz",
+  "stadt",
+  "land",
 ];
 
-const UsersTable = () => {
-  const { atinaUsers } = useSelector((state) => state.atina);
+const MobileBookingsTable = () => {
+  const { mobileBookings } = useSelector((state) => state.atina);
+  const { getMobileBookingsData } = useAtinaCalls();
 
   // ===pagination states START===
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(atinaUsers?.length);
-  const [shownData, setShownData] = useState([]);
+  const [rowsPerPage, setRowsPerPage] = useState(mobileBookings?.length);
+  const [shownData, setShownData] = useState(mobileBookings);
   const handlePagination = () => {
     let currentPage = rowsPerPage * page;
-    const newArray = atinaUsers?.slice(currentPage, currentPage + rowsPerPage);
+    const newArray = mobileBookings?.slice(
+      currentPage,
+      currentPage + rowsPerPage
+    );
     return setShownData(newArray);
   };
   // ===pagination states END===
 
   // ===Table Filter START===
   const [filterVal, setFilterVal] = useState({});
+  console.log(filterVal);
   const handleFilter = () => {
     const flag = Object.values(filterVal).some((x) => x !== "");
-    const filteredData = atinaUsers.filter((item) =>
+    const filteredData = mobileBookings?.filter((item) =>
       flag
         ? item.id === parseInt(filterVal.id) ||
-          (item?.firstname?.toLowerCase() ===
-            filterVal?.firstname?.toLowerCase() &&
-            filterVal.firstname !== "") ||
-          (item?.lastname?.toLowerCase() ===
-            filterVal?.lastname?.toLowerCase() &&
-            filterVal.lastname !== "") ||
-          (item?.username?.toLowerCase() ===
-            filterVal?.username?.toLowerCase() &&
-            filterVal.username !== "") ||
-          item?.personnelnumber?.toLowerCase() ===
-            filterVal?.personnelNumber?.toLowerCase()
+          (item?.date?.toLowerCase() === filterVal?.date?.toLowerCase() &&
+            filterVal.date !== "") ||
+          (item?.bookingType?.toLowerCase() ===
+            filterVal?.bookingType?.toLowerCase() &&
+            filterVal.bookingType !== "") ||
+          (item?.street?.toLowerCase() === filterVal?.street?.toLowerCase() &&
+            filterVal.street !== "") ||
+          (item?.zip?.toLowerCase() === filterVal?.zip?.toLowerCase() &&
+            filterVal.zip !== "") ||
+          (item?.city?.toLowerCase() === filterVal?.city?.toLowerCase() &&
+            filterVal.city !== "") ||
+          (item?.country?.toLowerCase() === filterVal?.country?.toLowerCase() &&
+            filterVal.country !== "")
         : true
     );
     setShownData(filteredData);
@@ -95,18 +105,17 @@ const UsersTable = () => {
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
   // === Column Select END ===
 
-  const { getUsersData } = useAtinaCalls();
   useEffect(() => {
-    getUsersData();
+    getMobileBookingsData();
   }, []);
 
   useEffect(() => {
     handlePagination();
-  }, [page, rowsPerPage, atinaUsers]);
+  }, [page, rowsPerPage, mobileBookings]);
 
   return (
     <>
-      <UsersFilter
+      <BookingsFilter
         handleReset={handleReset}
         handleFilter={handleFilter}
         filterVal={filterVal}
@@ -128,11 +137,12 @@ const UsersTable = () => {
             setSelectedColumns={setSelectedColumns}
           />
           <Pagination
-            data={atinaUsers}
+            data={mobileBookings}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
+            handlePagination={handlePagination}
           />
         </Box>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -149,10 +159,14 @@ const UsersTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {shownData?.map((user) => {
+            {shownData?.map((booking) => {
+              let date = new Date(booking?.date);
+              let time = booking?.time;
+              time = time.slice(0, time?.indexOf("."));
+
               return (
                 <TableRow
-                  key={user.id}
+                  key={booking.id}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     "&:hover": { backgroundColor: "#ddd" },
@@ -163,39 +177,47 @@ const UsersTable = () => {
                     component="th"
                     scope="row"
                   >
-                    {user?.id}
+                    {booking?.id}
                   </TableCell>
-                  {selectedColumns.includes("firstname") && (
+                  {selectedColumns.includes("datum") && (
                     <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                      {user?.firstname}
+                      {date.toLocaleDateString("de-DE")}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("lastname") && (
+                  {selectedColumns.includes("zeitpunkt") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {user?.lastname}
+                      {/* {booking?.time} */}
+                      {time}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("username") && (
+                  {selectedColumns.includes("buchungstyp") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {user?.username}
+                      {booking?.bookingType}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("password") && (
+                  {selectedColumns.includes("straße") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      ********
+                      {booking?.street}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("personnelnumber") && (
+                  {selectedColumns.includes("straßennummer") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {user?.personnelnumber}
+                      {booking?.streetnumber}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("image") && (
+                  {selectedColumns.includes("plz") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      <Avatar
-                        sx={tableStyle.tr.image}
-                        src={`data:image/png;base64,${user?.image}`}
-                      />
+                      {booking?.zip}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("stadt") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {booking?.city}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("land") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {booking?.country}
                     </TableCell>
                   )}
                 </TableRow>
@@ -208,4 +230,4 @@ const UsersTable = () => {
   );
 };
 
-export default UsersTable;
+export default MobileBookingsTable;

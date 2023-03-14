@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import UsersTable from "../components/tables/UsersTable";
-import useUsersCalls from "../hooks/useUsersCalls";
+import useAtinaCalls from "../hooks/useAtinaCalls";
 
 const AtinaUsers = () => {
-  const { getUsersData } = useUsersCalls();
+  const { getUsersData } = useAtinaCalls();
   useEffect(() => {
     getUsersData();
   }, []);

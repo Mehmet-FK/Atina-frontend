@@ -4,9 +4,8 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
-import DatePicker from "./DateTimePicker";
 
-const UsersFilter = ({
+const BookingsFilter = ({
   filterVal,
   setFilterVal,
   handleFilter,
@@ -30,10 +29,10 @@ const UsersFilter = ({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "start",
-        height: open ? "10rem" : "3rem",
+        height: open ? "12.5rem" : "3rem",
         transition: "all 0.3s",
         position: "sticky",
-        top: "4.1rem",
+        top: "3rem",
         zIndex: "3",
         backgroundColor: "#fff",
         border: "1px solid #ddd5",
@@ -76,7 +75,15 @@ const UsersFilter = ({
         }}
       >
         {/* //? == ROW 1 == */}
-        <Grid container sx={{ width: "95%", columnGap: "10px" }}>
+        <Grid
+          container
+          sx={{
+            width: "95%",
+            columnGap: "10px",
+            rowGap: "5px",
+            paddingLeft: "1rem",
+          }}
+        >
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
@@ -91,46 +98,66 @@ const UsersFilter = ({
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.firstname || ""}
+              value={filterVal.date || ""}
               variant="outlined"
               size="small"
-              label="Firstname"
-              name="firstname"
+              label="Datum"
+              name="date"
             />
           </Grid>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.lastname || ""}
+              value={filterVal.bookingType || ""}
               variant="outlined"
               size="small"
-              label="Lastname"
-              name="lastname"
+              label="Buchungstyp"
+              name="bookingType"
             />
           </Grid>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.username || ""}
+              value={filterVal.street || ""}
               variant="outlined"
               size="small"
-              label="Username"
-              name="username"
+              label="Straße"
+              name="street"
             />
           </Grid>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.personnelNumber || ""}
+              value={filterVal.zip || ""}
               variant="outlined"
               size="small"
-              label="Personnel Number"
-              name="personnelNumber"
+              label="PLZ "
+              name="zip"
+            />
+          </Grid>
+          <Grid item md={2}>
+            <TextField
+              onChange={handleChange}
+              value={filterVal.city || ""}
+              variant="outlined"
+              size="small"
+              label="Stadt "
+              name="city"
+            />
+          </Grid>
+          <Grid item md={2}>
+            <TextField
+              onChange={handleChange}
+              value={filterVal.country || ""}
+              variant="outlined"
+              size="small"
+              label="Land "
+              name="country"
             />
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", columnGap: "5px" }}>
+        <Box sx={{ display: "flex", columnGap: "5px", paddingLeft: "1rem" }}>
           <Button
             color={"error"}
             variant="contained"
@@ -153,4 +180,4 @@ const UsersFilter = ({
   );
 };
 
-export default UsersFilter;
+export default BookingsFilter;

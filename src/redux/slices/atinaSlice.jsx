@@ -4,7 +4,9 @@ const atinaSlice = createSlice({
   name: "atina",
 
   initialState: {
-    AtinaUsers: [],
+    atinaUsers: [],
+    mobileBookings: [],
+    nfcTags: [],
     loading: false,
     error: false,
     // TODO: Add other Slices i.e. "mobileBookings"
@@ -16,7 +18,13 @@ const atinaSlice = createSlice({
     },
     getSuccess: (state, { payload: { data, url } }) => {
       state.loading = false;
-      state[url] = data;
+      if (url.toLowerCase().includes("mobile")) {
+        state.mobileBookings = data;
+      } else if (url.toLowerCase().includes("nfc")) {
+        state.nfcTags = data;
+      } else if (url.toLowerCase().includes("users")) {
+        state.atinaUsers = data;
+      }
     },
     fetchFail: (state) => {
       state.loading = false;

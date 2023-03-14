@@ -6,6 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
+import { textTransform } from "@mui/system";
 
 const ITEM_HEIGHT = 50;
 const ITEM_PADDING_TOP = 8;
@@ -50,7 +51,10 @@ const ColumnSelect = ({
           {tableColumns.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={selectedColumns.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+              <ListItemText
+                sx={{ textTransform: "capitalize" }}
+                primary={name}
+              />
             </MenuItem>
           ))}
         </Select>

@@ -4,19 +4,15 @@ import { useDispatch } from "react-redux";
 import { fetchFail, fetchStart, getSuccess } from "../redux/slices/atinaSlice";
 import useAxios from "./useAxios";
 
-const useUsersCalls = () => {
+const useAtinaCalls = () => {
   const dispatch = useDispatch();
   const { axiosInstance } = useAxios();
 
-  //!--------------- GET CALL--------------
-  const getUsersData = async () => {
-    const url = "AtinaUsers";
-
+  //!--------------- GET CALL --------------
+  const getAtinaData = async (url) => {
     dispatch(fetchStart());
-
     try {
       const { data } = await axiosInstance.get(`${url}`);
-
       dispatch(getSuccess({ data, url }));
     } catch (err) {
       dispatch(fetchFail());
@@ -24,7 +20,11 @@ const useUsersCalls = () => {
     }
   };
 
-  return { getUsersData };
+  const getUsersData = () => getAtinaData("AtinaUsers");
+  const getMobileBookingsData = () => getAtinaData("api/AtinaMobileBookings");
+  const getNfcTagsData = () => getAtinaData("AtinaNfcTags");
+
+  return { getUsersData, getMobileBookingsData, getNfcTagsData };
 };
 
-export default useUsersCalls;
+export default useAtinaCalls;
