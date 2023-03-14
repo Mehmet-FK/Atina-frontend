@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
-import { Avatar } from "@mui/material";
+
 import errorImg from "../assets/error.png";
 
 const style = {
@@ -61,7 +61,11 @@ const ErrorModal = () => {
                 {errorMsg}
               </Typography>
             </Box>
-            <img style={{ width: "10rem", height: "10rem" }} src={errorImg} />
+            <img
+              style={{ width: "10rem", height: "10rem" }}
+              alt="error"
+              src={errorImg}
+            />
           </Box>
         </Fade>
       </Modal>

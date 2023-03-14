@@ -36,7 +36,6 @@ const UsersFilter = ({
         zIndex: "3",
         backgroundColor: "#fff",
         border: "1px solid #ddd5",
-        border: "1px solid red",
       }}
     >
       <Box
