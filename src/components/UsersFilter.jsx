@@ -129,7 +129,7 @@ const UsersFilter = ({
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", columnGap: "5px" }}>
+        <Box sx={{ display: "flex", columnGap: "5px", justifyContent: "end" }}>
           <Button
             color={"error"}
             variant="contained"

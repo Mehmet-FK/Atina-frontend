@@ -199,7 +199,7 @@ export default function Dashboard() {
 
         <Divider />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+      <Box component="main" sx={{ flexGrow: 0, p: 2 }}>
         <DrawerHeader />
         <Outlet />
       </Box>

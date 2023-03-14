@@ -117,7 +117,13 @@ const MobileBookingsTable = () => {
   }, [page, rowsPerPage, mobileBookings]);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        paddingLeft: "2rem",
+      }}
+    >
       <BookingsFilter
         handleReset={handleReset}
         handleFilter={handleFilter}
@@ -229,7 +235,7 @@ const MobileBookingsTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
 
