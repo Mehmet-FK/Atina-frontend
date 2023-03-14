@@ -23,6 +23,8 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import useAtinaCalls from "../hooks/useAtinaCalls";
 import logo from "../assets/attensam-logo.svg";
 import { Tooltip } from "@mui/material";
+import ErrorModal from "../components/ErrorModal";
+import Loading from "../components/Loading";
 
 const drawerWidth = 240;
 
@@ -130,6 +132,8 @@ export default function Dashboard() {
 
   return (
     <Box sx={{ display: "flex" }}>
+      <ErrorModal />
+      <Loading />
       <CssBaseline />
       <AppBar sx={{ backgroundColor: "red" }} position="fixed" open={open}>
         <Toolbar>

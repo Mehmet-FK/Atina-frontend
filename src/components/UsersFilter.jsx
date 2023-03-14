@@ -36,6 +36,7 @@ const UsersFilter = ({
         zIndex: "3",
         backgroundColor: "#fff",
         border: "1px solid #ddd5",
+        border: "1px solid red",
       }}
     >
       <Box
@@ -128,8 +129,13 @@ const UsersFilter = ({
             />
           </Grid>
         </Grid>
-
-        <Box sx={{ display: "flex", columnGap: "5px", justifyContent: "end" }}>
+        <Box
+          sx={{
+            display: "flex",
+            columnGap: "5px",
+            justifyContent: "end",
+          }}
+        >
           <Button
             color={"error"}
             variant="contained"

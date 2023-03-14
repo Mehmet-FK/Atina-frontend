@@ -107,7 +107,7 @@ const UsersTable = () => {
   }, [page, rowsPerPage, atinaUsers]);
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", paddingLeft: "2rem" }}>
       <UsersFilter
         handleReset={handleReset}
         handleFilter={handleFilter}
@@ -206,7 +206,7 @@ const UsersTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
 

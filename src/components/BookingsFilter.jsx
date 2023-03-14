@@ -36,6 +36,7 @@ const BookingsFilter = ({
         zIndex: "3",
         backgroundColor: "#fff",
         border: "1px solid #ddd5",
+        border: "1px solid red",
       }}
     >
       <Box
@@ -157,7 +158,14 @@ const BookingsFilter = ({
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", columnGap: "5px", paddingLeft: "1rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            columnGap: "5px",
+            justifyContent: "end",
+            paddingInline: "3rem",
+          }}
+        >
           <Button
             color={"error"}
             variant="contained"

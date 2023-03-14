@@ -76,7 +76,7 @@ const NfcTable = () => {
 
   // ===Table Filter START===
   const [filterVal, setFilterVal] = useState({});
-  console.log(filterVal);
+
   const handleFilter = () => {
     // const flag = Object.values(filterVal).some((x) => x !== "");
     // const filteredData = mobileBookings?.filter((item) =>

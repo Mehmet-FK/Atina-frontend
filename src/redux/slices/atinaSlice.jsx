@@ -9,6 +9,7 @@ const atinaSlice = createSlice({
     nfcTags: [],
     loading: false,
     error: false,
+    errorMsg: "asda",
     // TODO: Add other Slices i.e. "mobileBookings"
   },
   reducers: {
@@ -26,9 +27,10 @@ const atinaSlice = createSlice({
         state.atinaUsers = data;
       }
     },
-    fetchFail: (state) => {
+    fetchFail: (state, { payload: { message } }) => {
       state.loading = false;
       state.error = true;
+      state.errorMsg = message;
     },
   },
 });

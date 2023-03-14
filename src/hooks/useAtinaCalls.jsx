@@ -14,7 +14,8 @@ const useAtinaCalls = () => {
       const { data } = await axiosInstance.get(`${url}`);
       dispatch(getSuccess({ data, url }));
     } catch (err) {
-      dispatch(fetchFail());
+      const { message } = err;
+      dispatch(fetchFail({ message }));
       console.log(err);
     }
   };
