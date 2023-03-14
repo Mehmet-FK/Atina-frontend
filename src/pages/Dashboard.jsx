@@ -6,7 +6,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
+
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -106,6 +106,7 @@ export default function Dashboard() {
   const { getUsersData } = useAtinaCalls();
   React.useEffect(() => {
     getUsersData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const drawerList = [
@@ -146,7 +147,7 @@ export default function Dashboard() {
           {/* <Typography variant="h6" noWrap component="div">
             ATINA
           </Typography> */}
-          <img style={{ width: "150px" }} src={logo} />
+          <img style={{ width: "150px" }} src={logo} alt="logo" />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -192,7 +193,7 @@ export default function Dashboard() {
 
         <Divider />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
         <DrawerHeader />
         <Outlet />
       </Box>

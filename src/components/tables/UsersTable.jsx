@@ -53,7 +53,7 @@ const UsersTable = () => {
 
   // ===pagination states START===
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(atinaUsers?.length);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [shownData, setShownData] = useState([]);
   const handlePagination = () => {
     let currentPage = rowsPerPage * page;
@@ -98,10 +98,12 @@ const UsersTable = () => {
   const { getUsersData } = useAtinaCalls();
   useEffect(() => {
     getUsersData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     handlePagination();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, rowsPerPage, atinaUsers]);
 
   return (

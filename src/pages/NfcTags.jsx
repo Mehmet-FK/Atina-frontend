@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 
-import UsersTable from "../components/tables/UsersTable";
+import NfcTable from "../components/tables/NfcTable";
 import useAtinaCalls from "../hooks/useAtinaCalls";
 
-const AtinaUsers = () => {
-  const { getUsersData } = useAtinaCalls();
+const NfcTags = () => {
+  const { getNfcTagsData } = useAtinaCalls();
   useEffect(() => {
-    getUsersData();
+    getNfcTagsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <UsersTable />
+      <NfcTable />
     </div>
   );
 };
 
-export default AtinaUsers;
+export default NfcTags;

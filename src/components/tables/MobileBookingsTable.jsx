@@ -6,15 +6,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
-import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
-import UpgradeIcon from "@mui/icons-material/Upgrade";
+
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
 import BookingsFilter from "../BookingsFilter";
-import useSortColumn from "../../hooks/useSortColumn";
 
 const tableStyle = {
   th: {
@@ -53,25 +51,27 @@ const tableColumns = [
 
 const MobileBookingsTable = () => {
   const { mobileBookings } = useSelector((state) => state.atina);
+
   const { getMobileBookingsData } = useAtinaCalls();
 
   // ===pagination states START===
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(mobileBookings?.length);
-  const [shownData, setShownData] = useState(mobileBookings);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [shownData, setShownData] = useState();
   const handlePagination = () => {
     let currentPage = rowsPerPage * page;
     const newArray = mobileBookings?.slice(
       currentPage,
       currentPage + rowsPerPage
     );
+
     return setShownData(newArray);
   };
   // ===pagination states END===
 
   // ===Table Filter START===
   const [filterVal, setFilterVal] = useState({});
-  console.log(filterVal);
+
   const handleFilter = () => {
     const flag = Object.values(filterVal).some((x) => x !== "");
     const filteredData = mobileBookings?.filter((item) =>
@@ -97,7 +97,7 @@ const MobileBookingsTable = () => {
 
   const handleReset = () => {
     setFilterVal({});
-    handlePagination();
+    handleFilter();
   };
   // ===Table Filter END===
 
@@ -107,10 +107,13 @@ const MobileBookingsTable = () => {
 
   useEffect(() => {
     getMobileBookingsData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     handlePagination();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, rowsPerPage, mobileBookings]);
 
   return (

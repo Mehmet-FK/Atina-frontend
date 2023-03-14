@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import MobileBookingsTable from "../components/tables/MobileBookingsTable";
 import useAtinaCalls from "../hooks/useAtinaCalls";
 
@@ -7,8 +6,8 @@ const MobileBookings = () => {
   const { getMobileBookingsData } = useAtinaCalls();
   useEffect(() => {
     getMobileBookingsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { mobileBookings } = useSelector((state) => state.atina);
 
   return (
     <div>

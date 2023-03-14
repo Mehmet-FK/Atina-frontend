@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,7 +6,6 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-import { textTransform } from "@mui/system";
 
 const ITEM_HEIGHT = 50;
 const ITEM_PADDING_TOP = 8;

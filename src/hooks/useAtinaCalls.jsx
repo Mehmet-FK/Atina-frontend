@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 // import { data } from "../userData";
 import { fetchFail, fetchStart, getSuccess } from "../redux/slices/atinaSlice";

@@ -6,15 +6,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
-import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
-import UpgradeIcon from "@mui/icons-material/Upgrade";
+
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
 import BookingsFilter from "../BookingsFilter";
-import useSortColumn from "../../hooks/useSortColumn";
 
 const tableStyle = {
   th: {
@@ -41,30 +39,36 @@ const tableStyle = {
 };
 
 const tableColumns = [
-  "datum",
-  "zeitpunkt",
-  "buchungstyp",
+  "artikeltyp",
+  "artikelnummer",
   "straße",
   "straßennummer",
   "plz",
   "stadt",
   "land",
+  "data1",
+  "data2",
+  "data3",
+  "data4",
+  "data5",
+  "data6",
+  "data7",
+  "data8",
+  "data9",
+  "data10",
 ];
 
-const MobileBookingsTable = () => {
-  const { mobileBookings } = useSelector((state) => state.atina);
-  const { getMobileBookingsData } = useAtinaCalls();
+const NfcTable = () => {
+  const { nfcTags } = useSelector((state) => state.atina);
+  const { getNfcTagsData } = useAtinaCalls();
 
   // ===pagination states START===
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(mobileBookings?.length);
-  const [shownData, setShownData] = useState(mobileBookings);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [shownData, setShownData] = useState(nfcTags);
   const handlePagination = () => {
     let currentPage = rowsPerPage * page;
-    const newArray = mobileBookings?.slice(
-      currentPage,
-      currentPage + rowsPerPage
-    );
+    const newArray = nfcTags?.slice(currentPage, currentPage + rowsPerPage);
     return setShownData(newArray);
   };
   // ===pagination states END===
@@ -92,7 +96,7 @@ const MobileBookingsTable = () => {
     //         filterVal.country !== "")
     //     : true
     // );
-    setShownData(filteredData);
+    // setShownData(filteredData);
   };
 
   const handleReset = () => {
@@ -106,12 +110,14 @@ const MobileBookingsTable = () => {
   // === Column Select END ===
 
   useEffect(() => {
-    getMobileBookingsData();
+    getNfcTagsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     handlePagination();
-  }, [page, rowsPerPage, mobileBookings]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, rowsPerPage, nfcTags]);
 
   return (
     <>
@@ -137,7 +143,7 @@ const MobileBookingsTable = () => {
             setSelectedColumns={setSelectedColumns}
           />
           <Pagination
-            data={mobileBookings}
+            data={nfcTags}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
@@ -159,14 +165,12 @@ const MobileBookingsTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {shownData?.map((booking) => {
-              let date = new Date(booking?.date);
-              let time = booking?.time;
-              time = time.slice(0, time?.indexOf("."));
+            {shownData?.map((tag) => {
+              const { item } = tag;
 
               return (
                 <TableRow
-                  key={booking.id}
+                  key={item.id}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     "&:hover": { backgroundColor: "#ddd" },
@@ -177,47 +181,96 @@ const MobileBookingsTable = () => {
                     component="th"
                     scope="row"
                   >
-                    {booking?.id}
+                    {item?.id}
                   </TableCell>
-                  {selectedColumns.includes("datum") && (
+                  {selectedColumns.includes("artikeltyp") && (
                     <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                      {date.toLocaleDateString("de-DE")}
+                      {item?.itemType}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("zeitpunkt") && (
+                  {selectedColumns.includes("artikelnummer") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {/* {booking?.time} */}
-                      {time}
+                      {item?.itemNumber}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("buchungstyp") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.bookingType}
-                    </TableCell>
-                  )}
+
                   {selectedColumns.includes("straße") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.street}
+                      {item?.street}
                     </TableCell>
                   )}
                   {selectedColumns.includes("straßennummer") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.streetnumber}
+                      {item?.streetnumber}
                     </TableCell>
                   )}
                   {selectedColumns.includes("plz") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.zip}
+                      {item?.zip}
                     </TableCell>
                   )}
                   {selectedColumns.includes("stadt") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.city}
+                      {item?.city}
                     </TableCell>
                   )}
                   {selectedColumns.includes("land") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.country}
+                      {item?.country}
+                    </TableCell>
+                  )}
+
+                  {selectedColumns.includes("data1") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data1 ? item?.data1 : "X"}
+                    </TableCell>
+                  )}
+
+                  {selectedColumns.includes("data2") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data2 ? item?.data2 : "X"}
+                    </TableCell>
+                  )}
+
+                  {selectedColumns.includes("data3") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data3 ? item?.data3 : "X"}
+                    </TableCell>
+                  )}
+
+                  {selectedColumns.includes("data4") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data4 ? item?.data4 : "X"}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("data5") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data5 ? item?.data5 : "X"}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("data6") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data6 ? item?.data6 : "X"}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("data7") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data7 ? item?.data7 : "X"}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("data8") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data8 ? item?.data8 : "X"}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("data9") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data9 ? item?.data9 : "X"}
+                    </TableCell>
+                  )}
+                  {selectedColumns.includes("data10") && (
+                    <TableCell sx={tableStyle.tr.cell} align="left">
+                      {item?.data10 ? item?.data10 : "X"}
                     </TableCell>
                   )}
                 </TableRow>
@@ -230,4 +283,4 @@ const MobileBookingsTable = () => {
   );
 };
 
-export default MobileBookingsTable;
+export default NfcTable;

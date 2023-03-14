@@ -1,11 +1,8 @@
-import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+
 import styled from "@emotion/styled";
 
 const DatePicker = (props) => {
-  const [value, setValue] = useState();
-  console.log(value);
   const { label } = props;
   const Legend = styled("legend")({
     backgroundColor: "#fff",
