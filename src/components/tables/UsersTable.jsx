@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
 
-import { Avatar } from "@mui/material";
+import { Avatar, useMediaQuery } from "@mui/material";
 import UsersFilter from "../UsersFilter";
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
@@ -95,6 +95,9 @@ const UsersTable = () => {
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
   // === Column Select END ===
 
+  //==== MediaQuery ===
+  const xxl = useMediaQuery("(min-width:1400px)");
+
   const { getUsersData } = useAtinaCalls();
   useEffect(() => {
     getUsersData();
@@ -107,7 +110,7 @@ const UsersTable = () => {
   }, [page, rowsPerPage, atinaUsers]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", paddingLeft: "2rem" }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <UsersFilter
         handleReset={handleReset}
         handleFilter={handleFilter}
@@ -117,7 +120,7 @@ const UsersTable = () => {
       <TableContainer
         component={Paper}
         sx={{
-          maxWidth: "1250px",
+          maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
           paddingInline: "10px",
           position: "relative",

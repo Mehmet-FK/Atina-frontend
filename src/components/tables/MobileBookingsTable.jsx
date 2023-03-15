@@ -13,6 +13,7 @@ import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
 import BookingsFilter from "../BookingsFilter";
+import { useMediaQuery } from "@mui/material";
 
 const tableStyle = {
   th: {
@@ -105,6 +106,9 @@ const MobileBookingsTable = () => {
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
   // === Column Select END ===
 
+  //==== MediaQuery ===
+  const xxl = useMediaQuery("(min-width:1400px)");
+
   useEffect(() => {
     getMobileBookingsData();
 
@@ -121,7 +125,6 @@ const MobileBookingsTable = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        paddingLeft: "2rem",
       }}
     >
       <BookingsFilter
@@ -133,7 +136,7 @@ const MobileBookingsTable = () => {
       <TableContainer
         component={Paper}
         sx={{
-          maxWidth: "1250px",
+          maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
           paddingInline: "10px",
           position: "relative",

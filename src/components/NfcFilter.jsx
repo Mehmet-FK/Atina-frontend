@@ -1,4 +1,4 @@
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Typography, useMediaQuery } from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -22,10 +22,14 @@ const NfcFilter = () =>
     //     });
     //   };
 
+    //==== MediaQuery ===
+    const xxl = useMediaQuery("(min-width:1400px)");
+
     return (
       <Box
         sx={{
-          width: "1250px",
+          width: "100%",
+          maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
           display: "flex",
           flexDirection: "column",

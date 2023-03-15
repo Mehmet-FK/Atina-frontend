@@ -1,4 +1,11 @@
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -19,11 +26,14 @@ const BookingsFilter = ({
       [e.target.name]: e.target.value,
     });
   };
+  //==== MediaQuery ===
+  const xxl = useMediaQuery("(min-width:1400px)");
 
   return (
     <Box
       sx={{
-        width: "1250px",
+        width: "100%",
+        maxWidth: xxl ? "90%" : { lg: "1250px" },
         margin: "auto",
         display: "flex",
         flexDirection: "column",
@@ -71,7 +81,8 @@ const BookingsFilter = ({
           transition: "all 0.3s",
           display: open ? "flex" : "none",
           flexDirection: "column",
-          rowGap: "15px",
+
+          paddingInline: "2rem",
         }}
       >
         {/* //? == ROW 1 == */}
