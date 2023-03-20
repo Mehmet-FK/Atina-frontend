@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
+import UserModal from "../UserModal";
+import CustomTableRow from "../TableRow";
 
 const tableStyle = {
   th: {
@@ -55,6 +57,7 @@ const UsersTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [shownData, setShownData] = useState([]);
+
   const handlePagination = () => {
     let currentPage = rowsPerPage * page;
     const newArray = atinaUsers?.slice(currentPage, currentPage + rowsPerPage);
@@ -156,54 +159,11 @@ const UsersTable = () => {
           <TableBody>
             {shownData?.map((user) => {
               return (
-                <TableRow
-                  key={user.id}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                    "&:hover": { backgroundColor: "#ddd" },
-                  }}
-                >
-                  <TableCell
-                    sx={{ ...tableStyle.tr.cell, paddingLeft: "10px" }}
-                    component="th"
-                    scope="row"
-                  >
-                    {user?.id}
-                  </TableCell>
-                  {selectedColumns.includes("firstname") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                      {user?.firstname}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("lastname") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {user?.lastname}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("username") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {user?.username}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("password") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      ********
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("personnelnumber") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {user?.personnelnumber}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("image") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      <Avatar
-                        sx={tableStyle.tr.image}
-                        src={`data:image/png;base64,${user?.image}`}
-                      />
-                    </TableCell>
-                  )}
-                </TableRow>
+                <CustomTableRow
+                  user={user}
+                  selectedColumns={selectedColumns}
+                  tableStyle={tableStyle}
+                />
               );
             })}
           </TableBody>
