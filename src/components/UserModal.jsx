@@ -75,10 +75,9 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
   };
 
   const handleSubmit = () => {
-    console.log(inputVal);
     putUserData(inputVal);
   };
-  console.log(inputVal);
+
   return (
     <div>
       <Modal
@@ -92,7 +91,7 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
             <Box
               sx={{
                 ...style.imgStyle,
-                // backgroundImage: `url(${selectedImage})`,
+
                 backgroundImage: selectedImage
                   ? `url(${selectedImage})`
                   : style.imgStyle.backgroundImage,
