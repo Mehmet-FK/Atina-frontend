@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { toastErrorNotify, toastSuccessNotify } from "../helpers/ToastNotify";
 // import { data } from "../userData";
 import { fetchFail, fetchStart, getSuccess } from "../redux/slices/atinaSlice";
 import useAxios from "./useAxios";
@@ -20,11 +21,26 @@ const useAtinaCalls = () => {
     }
   };
 
+  //!--------------- PUT CALL --------------
+  const putAtinaData = async (url, info) => {
+    try {
+      await axiosInstance.put(`${url}/${info.id}`, info);
+      toastSuccessNotify(`Erfolgreich aktualisiert..`);
+    } catch (err) {
+      const { message } = err;
+      dispatch(fetchFail({ message }));
+      toastErrorNotify(`Etwas schiefgelaufen.. `);
+      toastErrorNotify(`${message}`);
+      console.log(err);
+    }
+  };
+  //GET
   const getUsersData = () => getAtinaData("AtinaUsers");
   const getMobileBookingsData = () => getAtinaData("api/AtinaMobileBookings");
   const getNfcTagsData = () => getAtinaData("AtinaNfcTags");
-
-  return { getUsersData, getMobileBookingsData, getNfcTagsData };
+  //PUT
+  const putUserData = (info) => putAtinaData("AtinaUsers", info);
+  return { getUsersData, getMobileBookingsData, getNfcTagsData, putUserData };
 };
 
 export default useAtinaCalls;

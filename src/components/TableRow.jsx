@@ -8,14 +8,13 @@ const CustomTableRow = ({ user, selectedColumns, tableStyle }) => {
     if (e.detail === 2) {
       setOpenUserModal(true);
     }
-    console.log(e.target.parent);
   };
   return (
     <TableRow
-      key={user.id}
       sx={{
         "&:last-child td, &:last-child th": { border: 0 },
         "&:hover": { backgroundColor: "#ddd" },
+        cursor: "pointer",
       }}
       onClick={handleDblClick}
     >

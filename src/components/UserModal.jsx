@@ -1,81 +1,121 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-
 import CardContent from "@mui/material/CardContent";
-
-import IconButton from "@mui/material/IconButton";
-
-import { TextField } from "@mui/material";
+import { Button, InputAdornment, TextField, Tooltip } from "@mui/material";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import placeholder from "../assets/placeholder.jpg";
+import { useRef, useState } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import useAtinaCalls from "../hooks/useAtinaCalls";
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  overflow: "auto",
+  cardStyle: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 2,
+    overflow: "auto",
+  },
+  imgStyle: {
+    backgroundImage: `url(${placeholder})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    height: "15rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "10rem",
+    color: "#00000055",
+    backgroundColor: "#ddd",
+  },
+  input: {
+    border: "2px solid red",
+    color: "red",
+    height: "2rem",
+    display: "none",
+  },
+  text: {
+    padding: "10px 15px",
+  },
+  button: {
+    backgroundColor: "#e10000",
+  },
 };
-const Input = styled("input")({
-  border: "2px solid red",
-  color: "red",
-  height: "2rem",
-  display: "none",
-});
 
 const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
-  const handleOpen = () => setOpenUserModal(true);
   const handleClose = () => setOpenUserModal(false);
+  const [visible, setVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [inputVal, setInputVal] = useState({
+    ...user,
+  });
+  const { putUserData } = useAtinaCalls();
+  const inputRef = useRef();
 
+  const handleImageInputChange = (e) => {
+    const selectedFile = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const fileContent = e.target.result;
+
+      const base64String = fileContent.split(",")[1];
+      // console.log(base64String);
+      setSelectedImage(fileContent);
+      setInputVal({ ...inputVal, image: base64String });
+    };
+    reader.readAsDataURL(selectedFile);
+  };
+
+  const handleSubmit = () => {
+    console.log(inputVal);
+    putUserData(inputVal);
+  };
+  console.log(inputVal);
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={openUserModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Card sx={style}>
+        <Card sx={style.cardStyle}>
           <label htmlFor="imgInput">
             <Box
               sx={{
-                backgroundImage: `url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9kovIHoCIVQJJCKE1ENFjnAgcaSGC6rEnxBwA04Tx43t2FnvDAfjkNibxgHxnWb2e/u992bee7tCa00YFsffekFY+nUzFtjW0LrvjRXrCDIAaPLlW0nHL0SsZtVoaF98mLrx3pdhOqLtYPHChahZcYYO7KvPFxvRl5XPp1sN3adWiD1ZAqD6XYK1b/dvE5IWryTt2udLFedwc1+9kLp+vbbpoDh+6TklxBeAi9TL0taeWpdmZzQDry0AcO+jQ12RyohqqoYoo8RDwJrU+qXkjWtfi8Xxt58BdQuwQs9qC/afLwCw8tnQbqYAPsgxE1S6F3EAIXux2oQFKm0ihMsOF71dHYx+f3NND68ghCu1YIoePPQN1pGRABkJ6Bus96CutRZMydTl+TvuiRW1m3n0eDl0vRPcEysqdXn+jsQPsrHMquGeXEaY4Yk4wxWcY5V/9scqOMOVUFthatyTy8QyqwZ+kDURKoMWxNKr2EeqVKcTNOajqKoBgOE28U4tdQl5p5bwCw7BWquaZSzAPlwjlithJtp3pTImSqQRrb2Z8PHGigD4RZuNX6JYj6wj7O4TFLbCO/Mn/m8R+h6rYSUb3ekokRY6f/YukArN979jcW+V/S8g0eT/N3VN3kTqWbQ428m9/8k0P/1aIhF36PccEl6EhOcAUCrXKZXXWS3XKd2vc/TRBG9O5ELC17MmWubD2nKhUKZa26Ba2+D3P+4/MNCFwg59oWVeYhkzgN/JDR8deKBoD7Y+ljEjGZ0sosXVTvbc6RHirr2reNy1OXd6pJsQ+gqjk8VWFYmHrwBzW/n+uMPFiRwHB2I7ih8ciHFxIkd/3Omk5tCDV1t+2nNu5sxxpDFNx+huNhVT3/zMDz8usXC3ddaHBj1GHj/As08fwTS7Kt1HBTmyN29vdwAw+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII=)`,
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                height: "15rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "10rem",
-                color: "#00000055",
+                ...style.imgStyle,
+                // backgroundImage: `url(${selectedImage})`,
+                backgroundImage: selectedImage
+                  ? `url(${selectedImage})`
+                  : style.imgStyle.backgroundImage,
               }}
             >
-              <PhotoCameraIcon fontSize="inherit" color="inherit" />
-              <Input id="imgInput" type="file" accept="image/*" />
+              <PhotoCameraIcon
+                sx={{ cursor: "pointer" }}
+                fontSize="inherit"
+                color="inherit"
+              />
+              <input
+                ref={inputRef}
+                style={style.input}
+                id="imgInput"
+                type="file"
+                accept="image/*"
+                onChange={handleImageInputChange}
+              />
             </Box>
           </label>
-          <CardContent>
+          <CardContent
+            sx={{ display: "flex", flexDirection: "column", rowGap: "7px" }}
+          >
             <Box
               sx={{
                 width: "100%",
@@ -83,24 +123,106 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                rowGap: "5px",
               }}
             >
               <TextField
                 variant="outlined"
                 label="Benutzername"
                 size="small"
+                name="username"
                 sx={{ width: "100%" }}
-                value={user?.username}
-              />
-              <Typography variant="p" color="text.secondary">
-                {user?.firstname}
-              </Typography>
-              <Typography variant="p" color="text.secondary">
-                {user?.lastname}
-              </Typography>
-              <Typography variant="p" color="text.secondary">
-                {user?.personnelnumber}
-              </Typography>{" "}
+                value={inputVal.username || ""}
+                onChange={(e) =>
+                  setInputVal({
+                    ...inputVal,
+                    username: e.target.value,
+                  })
+                }
+              />{" "}
+              <TextField
+                variant="outlined"
+                label="Kennwort"
+                size="small"
+                type={visible ? "text" : "password"}
+                name="password"
+                sx={{ width: "100%" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {!visible && (
+                        <VisibilityOffIcon
+                          onClick={() => setVisible(!visible)}
+                          sx={{ cursor: "pointer" }}
+                        />
+                      )}
+                      {visible && (
+                        <VisibilityIcon
+                          onClick={() => setVisible(!visible)}
+                          sx={{ cursor: "pointer" }}
+                        />
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+                value={inputVal.password || ""}
+                onChange={(e) =>
+                  setInputVal({
+                    ...inputVal,
+                    password: e.target.value,
+                  })
+                }
+              />{" "}
+            </Box>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", rowGap: "5px" }}
+            >
+              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+                <TextField
+                  variant="outlined"
+                  label="Zuname"
+                  size="small"
+                  sx={{ input: { color: "#888", cursor: "auto" } }}
+                  value={user?.firstname}
+                  InputProps={{ readOnly: true }}
+                />
+              </Tooltip>
+              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+                <TextField
+                  variant="outlined"
+                  label="Nachname"
+                  size="small"
+                  sx={{ input: { color: "#888", cursor: "auto" } }}
+                  value={user?.lastname}
+                  InputProps={{ readOnly: true }}
+                />
+              </Tooltip>
+              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+                <TextField
+                  variant="outlined"
+                  label="Personnelnummer"
+                  size="small"
+                  sx={{ input: { color: "#888", cursor: "auto" } }}
+                  value={user?.personnelnumber}
+                  InputProps={{ readOnly: true }}
+                />
+              </Tooltip>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+              <Button
+                onClick={handleSubmit}
+                sx={style.button}
+                variant="contained"
+              >
+                Speichern
+              </Button>
+              <Button
+                sx={style.button}
+                onClick={handleClose}
+                variant="contained"
+              >
+                Schließen
+              </Button>
             </Box>
           </CardContent>
         </Card>

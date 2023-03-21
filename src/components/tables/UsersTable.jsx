@@ -7,14 +7,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
 
-import { Avatar, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import UsersFilter from "../UsersFilter";
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
-import UserModal from "../UserModal";
+
 import CustomTableRow from "../TableRow";
 
 const tableStyle = {
@@ -31,11 +31,11 @@ const tableStyle = {
       padding: "5px",
     },
     image: {
-      transition: "0.3s all",
+      transition: "0.2s all",
       cursor: "pointer",
       "&:hover": {
-        transform: "scale(2.5)",
-        zIndex: "4",
+        transform: "scale(2)",
+        zIndex: "5",
       },
     },
   },
@@ -125,7 +125,7 @@ const UsersTable = () => {
         sx={{
           maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
-          paddingInline: "10px",
+          padding: "1rem 10px",
           position: "relative",
         }}
       >
@@ -160,6 +160,7 @@ const UsersTable = () => {
             {shownData?.map((user) => {
               return (
                 <CustomTableRow
+                  key={user.id}
                   user={user}
                   selectedColumns={selectedColumns}
                   tableStyle={tableStyle}
