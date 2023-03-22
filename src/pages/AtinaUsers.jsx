@@ -1,4 +1,3 @@
-import { Paper } from "@mui/material";
 import React, { useEffect } from "react";
 
 import UsersTable from "../components/tables/UsersTable";
