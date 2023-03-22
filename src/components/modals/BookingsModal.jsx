@@ -47,7 +47,6 @@ const style = {
 
 const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
   const handleClose = () => setOpenBookingModal(false);
-
   const [inputVal, setInputVal] = useState({
     ...booking,
   });
@@ -113,6 +112,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   variant="outlined"
                   label="Buchungstyp"
                   size="small"
+                  value={booking.bookingType || ""}
                   sx={{ input: { color: "#888", cursor: "auto" } }}
                   InputProps={{ readOnly: true }}
                 />
@@ -122,6 +122,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   variant="outlined"
                   label="Straße"
                   size="small"
+                  value={booking.street || ""}
                   sx={{ input: { color: "#888", cursor: "auto" } }}
                   InputProps={{ readOnly: true }}
                 />
@@ -131,6 +132,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   variant="outlined"
                   label="Hausnummer"
                   size="small"
+                  value={booking.streetnumber || ""}
                   sx={{ input: { color: "#888", cursor: "auto" } }}
                   InputProps={{ readOnly: true }}
                 />
@@ -141,6 +143,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                     variant="outlined"
                     label="PLZ"
                     size="small"
+                    value={booking.zip || ""}
                     sx={{ input: { color: "#888", cursor: "auto" } }}
                     InputProps={{ readOnly: true }}
                   />
@@ -150,6 +153,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                     variant="outlined"
                     label="Stadt"
                     size="small"
+                    value={booking.city || ""}
                     sx={{ input: { color: "#888", cursor: "auto" } }}
                     InputProps={{ readOnly: true }}
                   />
@@ -160,6 +164,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   variant="outlined"
                   label="Land"
                   size="small"
+                  value={booking.country || ""}
                   sx={{ input: { color: "#888", cursor: "auto" } }}
                   InputProps={{ readOnly: true }}
                 />
