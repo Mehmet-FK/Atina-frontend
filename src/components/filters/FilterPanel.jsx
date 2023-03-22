@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
-import DatePicker from "./DateTimePicker";
+import DatePicker from "../DateTimePicker";
 
 const UsersFilter = () => {
   const [open, setOpen] = useState(true);

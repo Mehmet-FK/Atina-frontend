@@ -6,7 +6,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import SettingsIcon from "@mui/icons-material/Settings";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,8 +22,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import useAtinaCalls from "../hooks/useAtinaCalls";
 import logo from "../assets/attensam-logo.svg";
-import { Tooltip } from "@mui/material";
-import ErrorModal from "../components/ErrorModal";
+import { Button, Paper, Tooltip, Typography } from "@mui/material";
+import ErrorModal from "../components/modals/ErrorModal";
 import Loading from "../components/Loading";
 
 const drawerWidth = 240;
@@ -114,7 +114,7 @@ export default function Dashboard() {
 
   const drawerList = [
     {
-      text: "Users",
+      text: "Benutzer",
       icon: <PeopleAltIcon />,
       nav: "users",
     },
@@ -128,85 +128,116 @@ export default function Dashboard() {
       icon: <NfcIcon />,
       nav: "nfc",
     },
+    {
+      text: "Einstellungen",
+      icon: <SettingsIcon />,
+      nav: "settings",
+    },
   ];
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <ErrorModal />
-      <Loading />
-      <CssBaseline />
-      <AppBar sx={{ backgroundColor: "red" }} position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <img
-            style={{ width: "150px", cursor: "pointer" }}
-            onClick={() => navigate("")}
-            src={logo}
-            alt="logo"
-          />
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-
-        <List>
-          {drawerList.map((item) => (
-            <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
-              <Tooltip title={item.text} placement="right" arrow>
-                <ListItemButton
+    <Paper>
+      <Box sx={{ display: "flex" }}>
+        <ErrorModal />
+        <Loading />
+        <CssBaseline />
+        <AppBar sx={{ backgroundColor: "red" }} position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <img
+                style={{ width: "150px", cursor: "pointer" }}
+                onClick={() => navigate("")}
+                src={logo}
+                alt="logo"
+              />
+              <Box sx={{ display: "flex", columnGap: "8px" }}>
+                <Typography variant="h6">Aktueller Benutzer</Typography>
+                <Button
                   sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
+                    backgroundColor: "#fff",
+                    color: "#e10000",
+                    "&:hover": { color: "#fff" },
                   }}
-                  onClick={() => navigate(item.nav)}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.text}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
-          ))}
-        </List>
+                  Ausloggen
+                </Button>
+              </Box>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
 
-        <Divider />
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
-        <DrawerHeader />
-        <Outlet />
+          <List>
+            {drawerList.map((item) => (
+              <ListItem
+                key={item.text}
+                disablePadding
+                sx={{ display: "block" }}
+              >
+                <Tooltip title={item.text} placement="right" arrow>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                    onClick={() => navigate(item.nav)}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.text}
+                      sx={{ opacity: open ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            ))}
+          </List>
+
+          <Divider />
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+          <DrawerHeader />
+          <Outlet />
+        </Box>
       </Box>
-    </Box>
+    </Paper>
   );
 }

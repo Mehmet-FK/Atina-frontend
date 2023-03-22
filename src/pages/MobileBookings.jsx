@@ -10,9 +10,10 @@ const MobileBookings = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <h1 style={{ marginBottom: "1rem" }}>Mobile Buchungen</h1>
       <MobileBookingsTable />
-    </div>
+    </>
   );
 };
 

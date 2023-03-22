@@ -4,11 +4,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Button, InputAdornment, TextField, Tooltip } from "@mui/material";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import placeholder from "../assets/placeholder.jpg";
+import placeholder from "../../assets/placeholder.jpg";
 import { useRef, useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import useAtinaCalls from "../hooks/useAtinaCalls";
+import useAtinaCalls from "../../hooks/useAtinaCalls";
 
 const style = {
   cardStyle: {
@@ -96,6 +96,7 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
                   ? `url(${selectedImage})`
                   : style.imgStyle.backgroundImage,
               }}
+              onDrop={() => console.log("dragged")}
             >
               <PhotoCameraIcon
                 sx={{ cursor: "pointer" }}
@@ -113,7 +114,7 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
             </Box>
           </label>
           <CardContent
-            sx={{ display: "flex", flexDirection: "column", rowGap: "7px" }}
+            sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
           >
             <Box
               sx={{
@@ -122,7 +123,7 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                rowGap: "5px",
+                rowGap: "15px",
               }}
             >
               <TextField
@@ -174,7 +175,7 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
               />{" "}
             </Box>
             <Box
-              sx={{ display: "flex", flexDirection: "column", rowGap: "5px" }}
+              sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
             >
               <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
                 <TextField

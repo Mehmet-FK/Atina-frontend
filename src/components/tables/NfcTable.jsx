@@ -12,8 +12,8 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
+import NfcFilter from "../filters/NfcFilter";
 
-import NfcFilter from "../NfcFilter";
 import { useMediaQuery } from "@mui/material";
 
 const tableStyle = {

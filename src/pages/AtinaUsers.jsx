@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import React, { useEffect } from "react";
 
 import UsersTable from "../components/tables/UsersTable";
@@ -11,9 +12,10 @@ const AtinaUsers = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <h1 style={{ marginBottom: "1rem" }}>Benutzer</h1>
       <UsersTable />
-    </div>
+    </>
   );
 };
 

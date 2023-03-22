@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 
-import errorImg from "../assets/error.png";
+import errorImg from "../../assets/error.png";
 
 const style = {
   position: "absolute",

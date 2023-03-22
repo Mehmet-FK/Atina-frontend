@@ -29,8 +29,8 @@ const NfcFilter = () =>
       <Box
         sx={{
           width: "100%",
-          maxWidth: xxl ? "90%" : { lg: "1250px" },
-          margin: "auto",
+          maxWidth: "1250px",
+          marginLeft: "5%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -40,8 +40,12 @@ const NfcFilter = () =>
           position: "sticky",
           top: "4.1rem",
           zIndex: "3",
-          backgroundColor: "#fff",
+          backgroundColor: "#80000022",
           border: "1px solid #ddd5",
+          borderRadius: "0 1rem 0 0",
+          "&:hover": {
+            backgroundColor: "#900000",
+          },
         }}
       >
         <Box

@@ -12,13 +12,13 @@ import React, { useState } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
 
-const BookingsFilter = ({
+const UsersFilter = ({
   filterVal,
   setFilterVal,
   handleFilter,
   handleReset,
 }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
     setFilterVal({
@@ -26,6 +26,7 @@ const BookingsFilter = ({
       [e.target.name]: e.target.value,
     });
   };
+
   //==== MediaQuery ===
   const xxl = useMediaQuery("(min-width:1400px)");
 
@@ -33,19 +34,23 @@ const BookingsFilter = ({
     <Box
       sx={{
         width: "100%",
-        maxWidth: xxl ? "90%" : { lg: "1250px" },
-        margin: "auto",
+        maxWidth: "1250px",
+        marginLeft: "5%",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "start",
-        height: open ? "12.5rem" : "3rem",
+        alignItems: "start",
+        justifyContent: "center",
+        height: open ? "10rem" : "3rem",
         transition: "all 0.3s",
         position: "sticky",
-        top: "3rem",
+        top: "4.1rem",
         zIndex: "3",
-        backgroundColor: "#fff",
+        backgroundColor: "#80000022",
         border: "1px solid #ddd5",
+        borderRadius: "0 1rem 0 0",
+        "&:hover": {
+          backgroundColor: "#900000",
+        },
       }}
     >
       <Box
@@ -81,20 +86,12 @@ const BookingsFilter = ({
           transition: "all 0.3s",
           display: open ? "flex" : "none",
           flexDirection: "column",
-
+          rowGap: "15px",
           paddingInline: "2rem",
         }}
       >
         {/* //? == ROW 1 == */}
-        <Grid
-          container
-          sx={{
-            width: "95%",
-            columnGap: "10px",
-            rowGap: "5px",
-            paddingLeft: "1rem",
-          }}
-        >
+        <Grid container sx={{ width: "95%", columnGap: "10px" }}>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
@@ -109,71 +106,49 @@ const BookingsFilter = ({
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.date || ""}
+              value={filterVal.firstname || ""}
               variant="outlined"
               size="small"
-              label="Datum"
-              name="date"
+              label="Firstname"
+              name="firstname"
             />
           </Grid>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.bookingType || ""}
+              value={filterVal.lastname || ""}
               variant="outlined"
               size="small"
-              label="Buchungstyp"
-              name="bookingType"
+              label="Lastname"
+              name="lastname"
             />
           </Grid>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.street || ""}
+              value={filterVal.username || ""}
               variant="outlined"
               size="small"
-              label="Straße"
-              name="street"
+              label="Username"
+              name="username"
             />
           </Grid>
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.zip || ""}
+              value={filterVal.personnelNumber || ""}
               variant="outlined"
               size="small"
-              label="PLZ "
-              name="zip"
-            />
-          </Grid>
-          <Grid item md={2}>
-            <TextField
-              onChange={handleChange}
-              value={filterVal.city || ""}
-              variant="outlined"
-              size="small"
-              label="Stadt "
-              name="city"
-            />
-          </Grid>
-          <Grid item md={2}>
-            <TextField
-              onChange={handleChange}
-              value={filterVal.country || ""}
-              variant="outlined"
-              size="small"
-              label="Land "
-              name="country"
+              label="Personnel Number"
+              name="personnelNumber"
             />
           </Grid>
         </Grid>
-
         <Box
           sx={{
             display: "flex",
             columnGap: "5px",
             justifyContent: "end",
-            paddingInline: "3rem",
           }}
         >
           <Button
@@ -198,4 +173,4 @@ const BookingsFilter = ({
   );
 };
 
-export default BookingsFilter;
+export default UsersFilter;

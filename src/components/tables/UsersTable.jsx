@@ -8,14 +8,15 @@ import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
 
 import { useMediaQuery } from "@mui/material";
-import UsersFilter from "../UsersFilter";
+// import UsersFilter from "../UsersFilter";
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
 
-import CustomTableRow from "../TableRow";
+import CustomTableRow from "../UsersTableRow";
+import UsersFilter from "../filters/UsersFilter";
 
 const tableStyle = {
   th: {
@@ -42,12 +43,12 @@ const tableStyle = {
 };
 
 const tableColumns = [
-  "firstname",
-  "lastname",
-  "username",
-  "password",
-  "personnelnumber",
-  "image",
+  "zuname",
+  "nachname",
+  "benutzername",
+  "kennwort",
+  "personnelnummer",
+  "bild",
 ];
 
 const UsersTable = () => {

@@ -12,8 +12,10 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
-import BookingsFilter from "../BookingsFilter";
+// import BookingsFilter from "../BookingsFilter";
 import { useMediaQuery } from "@mui/material";
+import BookingsFilter from "../filters/BookingsFilter";
+import CustomTableRow from "../BookingsTableRow";
 
 const tableStyle = {
   th: {
@@ -172,67 +174,13 @@ const MobileBookingsTable = () => {
           </TableHead>
           <TableBody>
             {shownData?.map((booking) => {
-              let date = new Date(booking?.date);
-              let time = booking?.time;
-              time = time.slice(0, time?.indexOf("."));
-
               return (
-                <TableRow
-                  key={booking.id}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                    "&:hover": { backgroundColor: "#ddd" },
-                  }}
-                >
-                  <TableCell
-                    sx={{ ...tableStyle.tr.cell, paddingLeft: "10px" }}
-                    component="th"
-                    scope="row"
-                  >
-                    {booking?.id}
-                  </TableCell>
-                  {selectedColumns.includes("datum") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                      {date.toLocaleDateString("de-DE")}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("zeitpunkt") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {/* {booking?.time} */}
-                      {time}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("buchungstyp") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.bookingType}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("straße") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.street}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("straßennummer") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.streetnumber}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("plz") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.zip}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("stadt") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.city}
-                    </TableCell>
-                  )}
-                  {selectedColumns.includes("land") && (
-                    <TableCell sx={tableStyle.tr.cell} align="left">
-                      {booking?.country}
-                    </TableCell>
-                  )}
-                </TableRow>
+                <CustomTableRow
+                  key={booking?.id}
+                  tableStyle={tableStyle}
+                  selectedColumns={selectedColumns}
+                  booking={booking}
+                />
               );
             })}
           </TableBody>

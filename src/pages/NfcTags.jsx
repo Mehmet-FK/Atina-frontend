@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import React, { useEffect } from "react";
 
 import NfcTable from "../components/tables/NfcTable";
@@ -11,9 +12,10 @@ const NfcTags = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <h1 style={{ marginBottom: "1rem" }}>NFC Tags</h1>
       <NfcTable />
-    </div>
+    </>
   );
 };
 

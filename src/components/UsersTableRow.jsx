@@ -1,6 +1,6 @@
 import { Avatar, TableCell, TableRow } from "@mui/material";
 import React, { useState } from "react";
-import UserModal from "./UserModal";
+import UserModal from "./modals/UserModal";
 
 const CustomTableRow = ({ user, selectedColumns, tableStyle }) => {
   const [openUserModal, setOpenUserModal] = useState(false);
@@ -30,32 +30,32 @@ const CustomTableRow = ({ user, selectedColumns, tableStyle }) => {
         />
         {user?.id}
       </TableCell>
-      {selectedColumns.includes("firstname") && (
+      {selectedColumns.includes("zuname") && (
         <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
           {user?.firstname}
         </TableCell>
       )}
-      {selectedColumns.includes("lastname") && (
+      {selectedColumns.includes("nachname") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           {user?.lastname}
         </TableCell>
       )}
-      {selectedColumns.includes("username") && (
+      {selectedColumns.includes("benutzername") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           {user?.username}
         </TableCell>
       )}
-      {selectedColumns.includes("password") && (
+      {selectedColumns.includes("kennwort") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           ********
         </TableCell>
       )}
-      {selectedColumns.includes("personnelnumber") && (
+      {selectedColumns.includes("personnelnummer") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           {user?.personnelnumber}
         </TableCell>
       )}
-      {selectedColumns.includes("image") && (
+      {selectedColumns.includes("bild") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           <Avatar
             sx={tableStyle.tr.image}
