@@ -27,7 +27,7 @@ const tableStyle = {
   tr: {
     cell: {
       fontSize: "0.8em",
-      padding: "10px",
+      padding: " 10px",
     },
     image: {
       transition: "0.3s all",
@@ -137,7 +137,7 @@ const NfcTable = () => {
         sx={{
           maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
-          paddingInline: "10px",
+          padding: "1rem 10px",
           position: "relative",
         }}
       >

@@ -140,7 +140,7 @@ const MobileBookingsTable = () => {
         sx={{
           maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
-          paddingInline: "10px",
+          padding: "1rem 10px",
           position: "relative",
         }}
       >

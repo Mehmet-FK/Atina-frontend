@@ -36,9 +36,13 @@ const BookingsFilter = ({
         position: "sticky",
         top: "3rem",
         zIndex: "3",
-        backgroundColor: "#aaa",
+        backgroundColor: "#80000022",
         border: "1px solid #ddd5",
         borderRadius: "0 1rem 0 0",
+
+        "&:hover": {
+          backgroundColor: "#900000",
+        },
       }}
     >
       <Box

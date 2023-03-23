@@ -177,6 +177,7 @@ export default function Dashboard() {
                     color: "#e10000",
                     "&:hover": { color: "#fff" },
                   }}
+                  onClick={() => navigate("/")}
                 >
                   Ausloggen
                 </Button>
