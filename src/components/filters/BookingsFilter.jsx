@@ -12,19 +12,21 @@ const BookingsFilter = ({
   handleReset,
 }) => {
   const [open, setOpen] = useState(false);
-
   const handleChange = (e) => {
     setFilterVal({
       ...filterVal,
       [e.target.name]: e.target.value,
     });
   };
+  console.log(filterVal);
+  // const today = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`;
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <Box
       sx={{
         width: "100%",
-        // maxWidth: xxl ? "90%" : { lg: "1250px" },
+
         maxWidth: "1285px",
         marginLeft: "5%",
         display: "flex",
@@ -115,6 +117,7 @@ const BookingsFilter = ({
               name="dateFrom"
               sx={{ width: "100%", cursor: "pointer" }}
               inputProps={{
+                max: today,
                 sx: {
                   "&::-webkit-datetime-edit-year-field": {
                     color: filterVal.dateFrom ? "inherit" : "#ddd5",
@@ -143,8 +146,11 @@ const BookingsFilter = ({
               size="small"
               label="Datum (bis)"
               name="dateTo"
+              max="1979-12-31"
               sx={{ width: "100%", cursor: "pointer" }}
               inputProps={{
+                max: today,
+                min: filterVal.dateFrom,
                 sx: {
                   cursor: "pointer",
                   "&::-webkit-datetime-edit-year-field": {

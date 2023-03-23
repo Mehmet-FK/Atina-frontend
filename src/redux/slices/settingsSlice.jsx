@@ -4,7 +4,7 @@ const settingsSlice = createSlice({
   name: "settings",
 
   initialState: {
-    darkMode: "dark",
+    darkMode: "light",
   },
   reducers: {
     setTheme: (state) => {

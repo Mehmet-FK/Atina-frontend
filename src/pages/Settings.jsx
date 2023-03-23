@@ -13,7 +13,9 @@ const Settings = () => {
   return (
     <div>
       <h1 style={{ marginBottom: "2rem" }}>Einstellungen</h1>
-      <Button onClick={() => handleSwitch()}>Change Theme</Button>
+      <Button onClick={() => handleSwitch()} variant="contained">
+        Thema Ändern
+      </Button>
     </div>
   );
 };

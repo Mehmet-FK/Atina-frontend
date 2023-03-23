@@ -1,83 +1,247 @@
-import { IconButton, Typography } from "@mui/material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
 
-const NfcFilter = () =>
-  //   {
-  //        filterVal,
-  //        setFilterVal,
-  //        handleFilter,
-  //        handleReset,
-  //   }
-  {
-    const [open, setOpen] = useState(false);
+const NfcFilter = () => {
+  const [open, setOpen] = useState(false);
+  const [filterVal, setFilterVal] = useState({});
 
-    //   const handleChange = (e) => {
-    //     setFilterVal({
-    //       ...filterVal,
-    //       [e.target.name]: e.target.value,
-    //     });
-    //   };
+  const handleChange = (e) => {
+    setFilterVal({
+      ...filterVal,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    return (
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "1250px",
+        marginLeft: "5%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "start",
+        height: open ? "12.5rem" : "3rem",
+        transition: "all 0.3s",
+        position: "sticky",
+        top: "4.1rem",
+        zIndex: "3",
+        backgroundColor: "#80000022",
+        border: "1px solid #ddd5",
+        borderRadius: "0 1rem 0 0",
+        "&:hover": {
+          backgroundColor: "#900000",
+        },
+      }}
+    >
       <Box
         sx={{
-          width: "100%",
-          maxWidth: "1250px",
-          marginLeft: "5%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
           justifyContent: "start",
-          height: open ? "10rem" : "3rem",
-          transition: "all 0.3s",
-          position: "sticky",
-          top: "4.1rem",
-          zIndex: "3",
-          backgroundColor: "#80000022",
-          border: "1px solid #ddd5",
-          borderRadius: "0 1rem 0 0",
-          "&:hover": {
-            backgroundColor: "#900000",
-          },
+          alignItems: "center",
+          width: "100%",
+          transition: "all 1s",
         }}
       >
+        <IconButton onClick={() => setOpen(!open)}>
+          <Typography
+            sx={{
+              fontSize: "1.5rem",
+              fontWeight: "900",
+              paddingInline: "0.6rem",
+              borderRadius: "50%",
+            }}
+          >
+            {open ? <CloseFullscreenIcon /> : <OpenInFullIcon />}
+          </Typography>
+        </IconButton>
+        <Typography
+          fontSize={12}
+          sx={{ display: open && "none", width: open ? "0px" : "auto" }}
+        >
+          Öffnen Sie hier den Suchfenster
+        </Typography>
+      </Box>
+      {open && (
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "start",
-            alignItems: "center",
-            width: "100%",
-            transition: "all 1s",
+            transition: "all 0.3s",
+            display: open ? "flex" : "none",
+            flexDirection: "column",
+            rowGap: "15px",
+            paddingInline: "2rem",
           }}
         >
-          <IconButton onClick={() => setOpen(!open)}>
-            <Typography
-              sx={{
-                fontSize: "1.5rem",
-                fontWeight: "900",
-                paddingInline: "0.6rem",
-                borderRadius: "50%",
-              }}
-            >
-              {open ? <CloseFullscreenIcon /> : <OpenInFullIcon />}
-            </Typography>
-          </IconButton>
-          <Typography
-            fontSize={12}
-            sx={{ display: open && "none", width: open ? "0px" : "auto" }}
+          {/* //? == ROW 1 == */}
+          <Grid
+            container
+            sx={{ width: "95%", columnGap: "10px", rowGap: "10px" }}
           >
-            Öffnen Sie hier den Suchfenster
-          </Typography>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.id || ""}
+                variant="outlined"
+                type={"number"}
+                size="small"
+                label="ID"
+                name="id"
+              />
+            </Grid>
+            <Grid item md={2}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.firstname || ""}
+                variant="outlined"
+                size="small"
+                label="Artikeltyp"
+                name="firstname"
+              />
+            </Grid>
+            <Grid item md={2}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.lastname || ""}
+                variant="outlined"
+                size="small"
+                label="Artikelnummer"
+                name="lastname"
+              />
+            </Grid>
+            <Grid item md={2}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.username || ""}
+                variant="outlined"
+                size="small"
+                label="Straße"
+                name="username"
+              />
+            </Grid>
+            <Grid item md={2}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" Hausnummer"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" PLZ"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={2}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label="Stadt"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label="Land"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" Data1"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" Data2"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" Data3"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={1}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" Data4"
+                name="personnelNumber"
+              />
+            </Grid>
+            <Grid item md={2}>
+              <TextField
+                onChange={handleChange}
+                value={filterVal.personnelNumber || ""}
+                variant="outlined"
+                size="small"
+                label=" Data5"
+                name="personnelNumber"
+              />
+            </Grid>
+          </Grid>
+          <Box
+            sx={{
+              display: "flex",
+              columnGap: "5px",
+              justifyContent: "end",
+            }}
+          >
+            <Button
+              color={"error"}
+              variant="contained"
+              // onClick={() => handleFilter()}
+            >
+              {" "}
+              Suchen{" "}
+            </Button>
+            <Button
+              color={"error"}
+              variant="contained"
+              // onClick={() => handleReset()}
+            >
+              {" "}
+              Löschen{" "}
+            </Button>
+          </Box>
         </Box>
-        {open && (
-          <Typography variant="h2">Filterpanel Noch Nicht Bereit</Typography>
-        )}
-      </Box>
-    );
-  };
+      )}
+    </Box>
+  );
+};
 
 export default NfcFilter;

@@ -137,6 +137,7 @@ const MobileBookingsTable = () => {
       />
       <TableContainer
         component={Paper}
+        // elevation={0}
         sx={{
           maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",

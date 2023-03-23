@@ -136,7 +136,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <Paper>
+    <Paper elevation={0}>
       <Box sx={{ display: "flex" }}>
         <ErrorModal />
         <Loading />
