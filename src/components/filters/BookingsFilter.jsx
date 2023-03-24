@@ -1,4 +1,11 @@
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  IconButton,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -24,9 +31,9 @@ const BookingsFilter = ({
 
   return (
     <Box
+      component={Paper}
       sx={{
         width: "100%",
-
         maxWidth: "1285px",
         marginLeft: "5%",
         display: "flex",
@@ -35,16 +42,11 @@ const BookingsFilter = ({
         justifyContent: "center",
         height: open ? "12.5rem" : "3rem",
         transition: "all 0.3s",
-        position: "sticky",
+        positi: "sticky",
         top: "3rem",
         zIndex: "3",
-        backgroundColor: "#80000022",
         border: "1px solid #ddd5",
         borderRadius: "0 1rem 0 0",
-
-        "&:hover": {
-          backgroundColor: "#900000",
-        },
       }}
     >
       <Box

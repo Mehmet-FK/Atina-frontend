@@ -1,4 +1,11 @@
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  IconButton,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -18,6 +25,7 @@ const NfcFilter = () => {
 
   return (
     <Box
+      component={Paper}
       sx={{
         width: "100%",
         maxWidth: "1250px",
@@ -31,12 +39,8 @@ const NfcFilter = () => {
         position: "sticky",
         top: "4.1rem",
         zIndex: "3",
-        backgroundColor: "#80000022",
         border: "1px solid #ddd5",
         borderRadius: "0 1rem 0 0",
-        "&:hover": {
-          backgroundColor: "#900000",
-        },
       }}
     >
       <Box
