@@ -6,14 +6,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
-
 import Pagination from "../Pagination";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import useAtinaCalls from "../../hooks/useAtinaCalls";
 import ColumnSelect from "../ColumnSelect";
 import NfcFilter from "../filters/NfcFilter";
-
 import { useMediaQuery } from "@mui/material";
 
 const tableStyle = {
@@ -64,7 +62,6 @@ const tableColumns = [
 const ItemsTable = () => {
   const { atinaItems } = useSelector((state) => state.atina);
   const { getAtinaItemsData } = useAtinaCalls();
-  console.log(atinaItems);
   // ===pagination states START===
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -80,7 +77,6 @@ const ItemsTable = () => {
   const [filterVal, setFilterVal] = useState({});
 
   const handleFilter = () => {};
-  console.log(filterVal);
   const handleReset = () => {
     setFilterVal({});
     handlePagination();

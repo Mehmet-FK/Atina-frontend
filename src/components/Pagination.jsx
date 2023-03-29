@@ -21,6 +21,7 @@ const Pagination = ({ data, page, setPage, rowsPerPage, setRowsPerPage }) => {
       rowsPerPage={rowsPerPage}
       onRowsPerPageChange={handleChangeRowsPerPage}
       labelRowsPerPage={"Anzahl Zeilen"}
+      // getItemAriaLabel
     />
   );
 };

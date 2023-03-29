@@ -27,13 +27,13 @@ const ColumnSelect = ({
     const {
       target: { value },
     } = e;
+
     setSelectedColumns(typeof value === "string" ? value.split(",") : value);
   };
-
   return (
-    <div>
+    <div style={{ width: "60%" }}>
       <FormControl
-        sx={{ m: 1, width: 300, display: "flex", justifyContent: "center" }}
+        sx={{ m: 1, width: "100%", display: "flex", justifyContent: "center" }}
       >
         <InputLabel id="checkbox-label">Angezeigte Spalten</InputLabel>
         <Select
