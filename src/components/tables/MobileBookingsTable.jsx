@@ -43,10 +43,10 @@ const tableStyle = {
 
 const tableColumns = [
   "datum",
-  "zeitpunkt",
+  "uhrzeit",
   "buchungstyp",
   "straße",
-  "straßennummer",
+  "hausnummer",
   "plz",
   "stadt",
   "land",
@@ -137,7 +137,6 @@ const MobileBookingsTable = () => {
       />
       <TableContainer
         component={Paper}
-        // elevation={0}
         sx={{
           maxWidth: xxl ? "90%" : { lg: "1250px" },
           margin: "auto",
@@ -163,9 +162,6 @@ const MobileBookingsTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={tableStyle.th.cell} align="left">
-                ID
-              </TableCell>
               {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}

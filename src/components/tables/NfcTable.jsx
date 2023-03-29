@@ -22,6 +22,7 @@ const tableStyle = {
       textTransform: "capitalize",
       fontWeight: "600",
       paddingInline: "5px",
+      minWidth: "4rem",
     },
   },
   tr: {
@@ -44,20 +45,20 @@ const tableColumns = [
   "artikeltyp",
   "artikelnummer",
   "straße",
-  "straßennummer",
+  "hausnummer",
   "plz",
   "stadt",
   "land",
-  "data1",
-  "data2",
-  "data3",
-  "data4",
-  "data5",
-  "data6",
-  "data7",
-  "data8",
-  "data9",
-  "data10",
+  "daten 1",
+  "daten 2",
+  "daten 3",
+  "daten 4",
+  "daten 5",
+  "daten 6",
+  "daten 7",
+  "daten 8",
+  "daten 9",
+  "daten 10",
 ];
 
 const NfcTable = () => {
@@ -78,29 +79,8 @@ const NfcTable = () => {
   // ===Table Filter START===
   const [filterVal, setFilterVal] = useState({});
 
-  const handleFilter = () => {
-    // const flag = Object.values(filterVal).some((x) => x !== "");
-    // const filteredData = mobileBookings?.filter((item) =>
-    //   flag
-    //     ? item.id === parseInt(filterVal.id) ||
-    //       (item?.date?.toLowerCase() === filterVal?.date?.toLowerCase() &&
-    //         filterVal.date !== "") ||
-    //       (item?.bookingType?.toLowerCase() ===
-    //         filterVal?.bookingType?.toLowerCase() &&
-    //         filterVal.bookingType !== "") ||
-    //       (item?.street?.toLowerCase() === filterVal?.street?.toLowerCase() &&
-    //         filterVal.street !== "") ||
-    //       (item?.zip?.toLowerCase() === filterVal?.zip?.toLowerCase() &&
-    //         filterVal.zip !== "") ||
-    //       (item?.city?.toLowerCase() === filterVal?.city?.toLowerCase() &&
-    //         filterVal.city !== "") ||
-    //       (item?.country?.toLowerCase() === filterVal?.country?.toLowerCase() &&
-    //         filterVal.country !== "")
-    //     : true
-    // );
-    // setShownData(filteredData);
-  };
-
+  const handleFilter = () => {};
+  console.log(filterVal);
   const handleReset = () => {
     setFilterVal({});
     handlePagination();
@@ -112,7 +92,7 @@ const NfcTable = () => {
   // === Column Select END ===
 
   //==== MediaQuery ===
-  const xxl = useMediaQuery("(min-width:1400px)");
+  const xxl = useMediaQuery("(min-width:1500px)");
 
   useEffect(() => {
     getNfcTagsData();
@@ -159,9 +139,9 @@ const NfcTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={tableStyle.th.cell} align="left">
+              {/*  <TableCell sx={tableStyle.th.cell} align="left">
                 ID
-              </TableCell>
+              </TableCell> */}
               {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}
@@ -181,16 +161,11 @@ const NfcTable = () => {
                     "&:hover": { backgroundColor: "#ddd" },
                   }}
                 >
-                  <TableCell
-                    sx={{ ...tableStyle.tr.cell, paddingLeft: "10px" }}
-                    component="th"
-                    scope="row"
-                  >
-                    {item?.id}
-                  </TableCell>
                   {selectedColumns.includes("artikeltyp") && (
                     <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                      {item?.itemType}
+                      {item?.itemType === "Order" && "Auftrag"}
+                      {item?.itemType === "Meter" && "Zähler"}
+                      {item?.itemType === "Car" && "KFZ"}
                     </TableCell>
                   )}
                   {selectedColumns.includes("artikelnummer") && (
@@ -204,7 +179,7 @@ const NfcTable = () => {
                       {item?.street}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("straßennummer") && (
+                  {selectedColumns.includes("hausnummer") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
                       {item?.streetnumber}
                     </TableCell>
@@ -225,57 +200,57 @@ const NfcTable = () => {
                     </TableCell>
                   )}
 
-                  {selectedColumns.includes("data1") && (
+                  {selectedColumns.includes("daten 1") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data1 ? item?.data1 : "X"}
+                      {item?.data1 ? item?.data1 : ""}
                     </TableCell>
                   )}
 
-                  {selectedColumns.includes("data2") && (
+                  {selectedColumns.includes("daten 2") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data2 ? item?.data2 : "X"}
+                      {item?.data2 ? item?.data2 : ""}
                     </TableCell>
                   )}
 
-                  {selectedColumns.includes("data3") && (
+                  {selectedColumns.includes("daten 3") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data3 ? item?.data3 : "X"}
+                      {item?.data3 ? item?.data3 : ""}
                     </TableCell>
                   )}
 
-                  {selectedColumns.includes("data4") && (
+                  {selectedColumns.includes("daten 4") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data4 ? item?.data4 : "X"}
+                      {item?.data4 ? item?.data4 : ""}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("data5") && (
+                  {selectedColumns.includes("daten 5") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data5 ? item?.data5 : "X"}
+                      {item?.data5 ? item?.data5 : ""}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("data6") && (
+                  {selectedColumns.includes("daten 6") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data6 ? item?.data6 : "X"}
+                      {item?.data6 ? item?.data6 : ""}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("data7") && (
+                  {selectedColumns.includes("daten 7") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data7 ? item?.data7 : "X"}
+                      {item?.data7 ? item?.data7 : ""}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("data8") && (
+                  {selectedColumns.includes("daten 8") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data8 ? item?.data8 : "X"}
+                      {item?.data8 ? item?.data8 : ""}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("data9") && (
+                  {selectedColumns.includes("daten 9") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data9 ? item?.data9 : "X"}
+                      {item?.data9 ? item?.data9 : ""}
                     </TableCell>
                   )}
-                  {selectedColumns.includes("data10") && (
+                  {selectedColumns.includes("daten 10") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data10 ? item?.data10 : "X"}
+                      {item?.data10 ? item?.data10 : ""}
                     </TableCell>
                   )}
                 </TableRow>

@@ -9,6 +9,7 @@ const CustomTableRow = ({ user, selectedColumns, tableStyle }) => {
       setOpenUserModal(true);
     }
   };
+
   return (
     <TableRow
       sx={{
@@ -18,20 +19,25 @@ const CustomTableRow = ({ user, selectedColumns, tableStyle }) => {
       }}
       onClick={handleDblClick}
     >
-      <TableCell
+      {/* <UserModal
+        setOpenUserModal={setOpenUserModal}
+        openUserModal={openUserModal}
+        user={user}
+      /> */}
+      {/* <TableCell
         sx={{ ...tableStyle.tr.cell, paddingLeft: "10px" }}
         component="th"
         scope="row"
       >
-        <UserModal
-          setOpenUserModal={setOpenUserModal}
-          openUserModal={openUserModal}
-          user={user}
-        />
         {user?.id}
-      </TableCell>
-      {selectedColumns.includes("zuname") && (
+      </TableCell> */}
+      {selectedColumns.includes("vorname") && (
         <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
+          <UserModal
+            setOpenUserModal={setOpenUserModal}
+            openUserModal={openUserModal}
+            user={user}
+          />
           {user?.firstname}
         </TableCell>
       )}
@@ -50,7 +56,7 @@ const CustomTableRow = ({ user, selectedColumns, tableStyle }) => {
           ********
         </TableCell>
       )}
-      {selectedColumns.includes("personnelnummer") && (
+      {selectedColumns.includes("personalnummer") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           {user?.personnelnumber}
         </TableCell>

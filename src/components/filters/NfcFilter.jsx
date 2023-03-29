@@ -5,6 +5,7 @@ import {
   Paper,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
@@ -12,9 +13,8 @@ import React, { useState } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
 
-const NfcFilter = () => {
+const NfcFilter = ({ filterVal, setFilterVal, handleFilter, handleReset }) => {
   const [open, setOpen] = useState(false);
-  const [filterVal, setFilterVal] = useState({});
 
   const handleChange = (e) => {
     setFilterVal({
@@ -22,6 +22,7 @@ const NfcFilter = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const xxl = useMediaQuery("(min-width:1500px)");
 
   return (
     <Box
@@ -29,7 +30,8 @@ const NfcFilter = () => {
       sx={{
         width: "100%",
         maxWidth: "1250px",
-        marginLeft: "5%",
+        margin: xxl ? "0 0 0 5%" : "auto",
+        // paddingBottom: "5rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -79,14 +81,20 @@ const NfcFilter = () => {
             flexDirection: "column",
             rowGap: "15px",
             paddingInline: "2rem",
+            // backgroundColor: "red",
+            // padddingBottom: "rem",
           }}
         >
           {/* //? == ROW 1 == */}
           <Grid
             container
-            sx={{ width: "95%", columnGap: "10px", rowGap: "10px" }}
+            sx={{
+              width: "95%",
+              columnGap: "10px",
+              rowGap: "10px",
+            }}
           >
-            <Grid item md={1}>
+            {/* <Grid item md={1}>
               <TextField
                 onChange={handleChange}
                 value={filterVal.id || ""}
@@ -96,125 +104,125 @@ const NfcFilter = () => {
                 label="ID"
                 name="id"
               />
-            </Grid>
+            </Grid> */}
             <Grid item md={2}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.firstname || ""}
+                value={filterVal.itemType || ""}
                 variant="outlined"
                 size="small"
                 label="Artikeltyp"
-                name="firstname"
+                name="itemType"
               />
             </Grid>
             <Grid item md={2}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.lastname || ""}
+                value={filterVal.itemNumber || ""}
                 variant="outlined"
                 size="small"
                 label="Artikelnummer"
-                name="lastname"
+                name="itemNumber"
               />
             </Grid>
             <Grid item md={2}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.username || ""}
+                value={filterVal.street || ""}
                 variant="outlined"
                 size="small"
                 label="Straße"
-                name="username"
+                name="street"
               />
             </Grid>
             <Grid item md={2}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.streetnumber || ""}
                 variant="outlined"
                 size="small"
                 label=" Hausnummer"
-                name="personnelNumber"
+                name="streetnumber"
               />
             </Grid>
             <Grid item md={1}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.zip || ""}
                 variant="outlined"
                 size="small"
                 label=" PLZ"
-                name="personnelNumber"
+                name="zip"
               />
             </Grid>
             <Grid item md={2}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.city || ""}
                 variant="outlined"
                 size="small"
                 label="Stadt"
-                name="personnelNumber"
+                name="city"
               />
             </Grid>
             <Grid item md={1}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.country || ""}
                 variant="outlined"
                 size="small"
                 label="Land"
-                name="personnelNumber"
+                name="country"
               />
             </Grid>
             <Grid item md={1}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.data1 || ""}
                 variant="outlined"
                 size="small"
-                label=" Data1"
-                name="personnelNumber"
+                label=" Daten 1"
+                name="data1"
               />
             </Grid>
             <Grid item md={1}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.data2 || ""}
                 variant="outlined"
                 size="small"
-                label=" Data2"
-                name="personnelNumber"
+                label=" Daten 2"
+                name="data2"
               />
             </Grid>
             <Grid item md={1}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.data3 || ""}
                 variant="outlined"
                 size="small"
-                label=" Data3"
-                name="personnelNumber"
+                label=" Daten 3"
+                name="data3"
               />
             </Grid>
             <Grid item md={1}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.data4 || ""}
                 variant="outlined"
                 size="small"
-                label=" Data4"
-                name="personnelNumber"
+                label=" Daten 4"
+                name="data4"
               />
             </Grid>
             <Grid item md={2}>
               <TextField
                 onChange={handleChange}
-                value={filterVal.personnelNumber || ""}
+                value={filterVal.data5 || ""}
                 variant="outlined"
                 size="small"
-                label=" Data5"
-                name="personnelNumber"
+                label=" Daten 5"
+                name="data5"
               />
             </Grid>
           </Grid>
@@ -228,7 +236,7 @@ const NfcFilter = () => {
             <Button
               color={"error"}
               variant="contained"
-              // onClick={() => handleFilter()}
+              onClick={() => handleFilter()}
             >
               {" "}
               Suchen{" "}
@@ -236,7 +244,7 @@ const NfcFilter = () => {
             <Button
               color={"error"}
               variant="contained"
-              // onClick={() => handleReset()}
+              onClick={() => handleReset()}
             >
               {" "}
               Löschen{" "}

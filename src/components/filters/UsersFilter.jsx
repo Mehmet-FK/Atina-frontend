@@ -5,8 +5,9 @@ import {
   Paper,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
-// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
@@ -26,14 +27,16 @@ const UsersFilter = ({
       [e.target.name]: e.target.value,
     });
   };
+  const xxl = useMediaQuery("(min-width:1500px)");
 
   return (
     <Box
       component={Paper}
       sx={{
         width: "100%",
+
         maxWidth: "1250px",
-        marginLeft: "5%",
+        margin: xxl ? "0 0 0 5%" : "auto",
         display: "flex",
         flexDirection: "column",
         alignItems: "start",
@@ -86,7 +89,7 @@ const UsersFilter = ({
       >
         {/* //? == ROW 1 == */}
         <Grid container sx={{ width: "95%", columnGap: "10px" }}>
-          <Grid item md={2}>
+          {/* <Grid item md={2}>
             <TextField
               onChange={handleChange}
               value={filterVal.id || ""}
@@ -96,34 +99,34 @@ const UsersFilter = ({
               label="ID"
               name="id"
             />
-          </Grid>
-          <Grid item md={2}>
+          </Grid> */}
+          <Grid item md={3}>
             <TextField
               onChange={handleChange}
               value={filterVal.firstname || ""}
               variant="outlined"
               size="small"
-              label="Firstname"
+              label="Vorname"
               name="firstname"
             />
           </Grid>
-          <Grid item md={2}>
+          <Grid item md={3}>
             <TextField
               onChange={handleChange}
               value={filterVal.lastname || ""}
               variant="outlined"
               size="small"
-              label="Lastname"
+              label="Nachname"
               name="lastname"
             />
           </Grid>
-          <Grid item md={2}>
+          <Grid item md={3}>
             <TextField
               onChange={handleChange}
               value={filterVal.username || ""}
               variant="outlined"
               size="small"
-              label="Username"
+              label="Benutzername"
               name="username"
             />
           </Grid>
@@ -133,7 +136,7 @@ const UsersFilter = ({
               value={filterVal.personnelNumber || ""}
               variant="outlined"
               size="small"
-              label="Personnel Number"
+              label="Personalnummer"
               name="personnelNumber"
             />
           </Grid>

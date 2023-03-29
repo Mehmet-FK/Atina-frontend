@@ -23,7 +23,7 @@ const CustomTableRow = ({ booking, tableStyle, selectedColumns }) => {
       }}
       onClick={handleDblClick}
     >
-      <TableCell
+      {/*   <TableCell
         sx={{ ...tableStyle.tr.cell, paddingLeft: "10px" }}
         component="th"
         scope="row"
@@ -34,13 +34,18 @@ const CustomTableRow = ({ booking, tableStyle, selectedColumns }) => {
           booking={booking}
         />
         {booking?.id}
-      </TableCell>
+      </TableCell> */}
       {selectedColumns.includes("datum") && (
         <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
+          <BookingsModal
+            openBookingModal={openBookingModal}
+            setOpenBookingModal={setOpenBookingModal}
+            booking={booking}
+          />
           {date.toLocaleDateString("de")}
         </TableCell>
       )}
-      {selectedColumns.includes("zeitpunkt") && (
+      {selectedColumns.includes("uhrzeit") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           {time}
         </TableCell>
@@ -55,7 +60,7 @@ const CustomTableRow = ({ booking, tableStyle, selectedColumns }) => {
           {booking?.street}
         </TableCell>
       )}
-      {selectedColumns.includes("straßennummer") && (
+      {selectedColumns.includes("hausnummer") && (
         <TableCell sx={tableStyle.tr.cell} align="left">
           {booking?.streetnumber}
         </TableCell>

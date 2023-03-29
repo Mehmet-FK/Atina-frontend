@@ -107,7 +107,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
             <Box
               sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
             >
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
                   label="Buchungstyp"
@@ -117,7 +117,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   InputProps={{ readOnly: true }}
                 />
               </Tooltip>
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
                   label="Straße"
@@ -127,7 +127,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   InputProps={{ readOnly: true }}
                 />
               </Tooltip>
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
                   label="Hausnummer"
@@ -138,7 +138,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                 />
               </Tooltip>
               <Box sx={{ display: "flex" }}>
-                <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+                <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                   <TextField
                     variant="outlined"
                     label="PLZ"
@@ -148,7 +148,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                     InputProps={{ readOnly: true }}
                   />
                 </Tooltip>
-                <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+                <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                   <TextField
                     variant="outlined"
                     label="Stadt"
@@ -159,7 +159,7 @@ const BookingsModal = ({ setOpenBookingModal, openBookingModal, booking }) => {
                   />
                 </Tooltip>
               </Box>
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
                   label="Land"

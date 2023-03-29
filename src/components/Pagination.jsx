@@ -20,6 +20,7 @@ const Pagination = ({ data, page, setPage, rowsPerPage, setRowsPerPage }) => {
       onPageChange={handleChangePage}
       rowsPerPage={rowsPerPage}
       onRowsPerPageChange={handleChangeRowsPerPage}
+      labelRowsPerPage={"Anzahl Zeilen"}
     />
   );
 };

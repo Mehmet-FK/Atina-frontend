@@ -43,11 +43,11 @@ const tableStyle = {
 };
 
 const tableColumns = [
-  "zuname",
+  "vorname",
   "nachname",
   "benutzername",
   "kennwort",
-  "personnelnummer",
+  "personalnummer",
   "bild",
 ];
 
@@ -147,9 +147,9 @@ const UsersTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={tableStyle.th.cell} align="left">
+              {/*   <TableCell sx={tableStyle.th.cell} align="left">
                 ID
-              </TableCell>
+              </TableCell> */}
               {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}

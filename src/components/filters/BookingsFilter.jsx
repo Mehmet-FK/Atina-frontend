@@ -5,6 +5,7 @@ import {
   Paper,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box } from "@mui/system";
@@ -25,17 +26,19 @@ const BookingsFilter = ({
       [e.target.name]: e.target.value,
     });
   };
-  console.log(filterVal);
+
   // const today = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`;
   const today = new Date().toISOString().split("T")[0];
+
+  const xxl = useMediaQuery("(min-width:1500px)");
 
   return (
     <Box
       component={Paper}
       sx={{
         width: "100%",
-        maxWidth: "1285px",
-        marginLeft: "5%",
+        maxWidth: "1250px",
+        margin: xxl ? "0 0 0 5%" : "auto",
         display: "flex",
         flexDirection: "column",
         alignItems: "start",
@@ -90,13 +93,13 @@ const BookingsFilter = ({
         <Grid
           container
           sx={{
-            width: "95%",
+            width: "100%",
             columnGap: "10px",
             rowGap: "5px",
             paddingLeft: "1rem",
           }}
         >
-          <Grid item md={2}>
+          {/* <Grid item md={2}>
             <TextField
               onChange={handleChange}
               value={filterVal.id || ""}
@@ -106,7 +109,7 @@ const BookingsFilter = ({
               label="ID"
               name="id"
             />
-          </Grid>
+          </Grid> */}
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
@@ -115,7 +118,7 @@ const BookingsFilter = ({
               variant="outlined"
               type="date"
               size="small"
-              label="Datum (ab)"
+              label="Datum (von)"
               name="dateFrom"
               sx={{ width: "100%", cursor: "pointer" }}
               inputProps={{
@@ -174,6 +177,77 @@ const BookingsFilter = ({
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
+              value={filterVal.timeFrom || ""}
+              className={"date-input"}
+              variant="outlined"
+              type="datetime-local"
+              size="small"
+              label="Datum-Uhrzeit (von)"
+              name="timeFrom"
+              sx={{ width: "100%", cursor: "pointer" }}
+              inputProps={{
+                sx: {
+                  "&::-webkit-datetime-edit-year-field": {
+                    color: filterVal.timeFrom ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-month-field": {
+                    color: filterVal.timeFrom ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-day-field": {
+                    color: filterVal.timeFrom ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-minute-field": {
+                    color: filterVal.timeFrom ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-hour-field": {
+                    color: filterVal.timeFrom ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-text": {
+                    color: filterVal.timeFrom ? "inherit" : "#ddd5",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item md={2}>
+            <TextField
+              onChange={handleChange}
+              value={filterVal.timeTo || ""}
+              className={"date-input"}
+              variant="outlined"
+              type="datetime-local"
+              size="small"
+              label="Datum-Uhrzeit  (bis)"
+              name="timeTo"
+              sx={{ width: "100%", cursor: "pointer" }}
+              inputProps={{
+                sx: {
+                  cursor: "pointer",
+                  "&::-webkit-datetime-edit-year-field": {
+                    color: filterVal.timeTo ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-month-field": {
+                    color: filterVal.timeTo ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-day-field": {
+                    color: filterVal.timeTo ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-minute-field": {
+                    color: filterVal.timeTo ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-hour-field": {
+                    color: filterVal.timeTo ? "inherit" : "#ddd5",
+                  },
+                  "&::-webkit-datetime-edit-text": {
+                    color: filterVal.timeTo ? "inherit" : "#ddd5",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item md={2}>
+            <TextField
+              onChange={handleChange}
               value={filterVal.bookingType || ""}
               variant="outlined"
               size="small"
@@ -189,6 +263,16 @@ const BookingsFilter = ({
               size="small"
               label="Straße"
               name="street"
+            />
+          </Grid>
+          <Grid item md={2}>
+            <TextField
+              onChange={handleChange}
+              value={filterVal.street || ""}
+              variant="outlined"
+              size="small"
+              label="Hausnummer"
+              name="streetNumber"
             />
           </Grid>
           <Grid item md={2}>
@@ -229,6 +313,7 @@ const BookingsFilter = ({
             columnGap: "5px",
             justifyContent: "end",
             paddingInline: "3rem",
+            paddingTop: "0.5rem",
           }}
         >
           <Button

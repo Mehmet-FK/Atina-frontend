@@ -177,17 +177,17 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
             <Box
               sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
             >
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
-                  label="Zuname"
+                  label="Vorname"
                   size="small"
                   sx={{ input: { color: "#888", cursor: "auto" } }}
                   value={user?.firstname}
                   InputProps={{ readOnly: true }}
                 />
               </Tooltip>
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
                   label="Nachname"
@@ -197,10 +197,10 @@ const UserModal = ({ setOpenUserModal, openUserModal, user }) => {
                   InputProps={{ readOnly: true }}
                 />
               </Tooltip>
-              <Tooltip title={"Shreibgeschützt"} placement="top-start" arrow>
+              <Tooltip title={"Gesperrt"} placement="top-start" arrow>
                 <TextField
                   variant="outlined"
-                  label="Personnelnummer"
+                  label="Personalnummer"
                   size="small"
                   sx={{ input: { color: "#888", cursor: "auto" } }}
                   value={user?.personnelnumber}
