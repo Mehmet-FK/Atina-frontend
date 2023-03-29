@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AtinaItems from "../pages/AtinaItems";
 
 import AtinaUsers from "../pages/AtinaUsers";
 import Dashboard from "../pages/Dashboard";
@@ -20,6 +21,7 @@ const AppRouter = () => {
             <Route path="users" element={<AtinaUsers />} />
             <Route path="nfc" element={<NfcTags />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="items" element={<AtinaItems />} />
           </Route>
         </Route>
       </Routes>

@@ -38,9 +38,17 @@ const useAtinaCalls = () => {
   const getUsersData = () => getAtinaData("AtinaUsers");
   const getMobileBookingsData = () => getAtinaData("api/AtinaMobileBookings");
   const getNfcTagsData = () => getAtinaData("AtinaNfcTags");
+  const getAtinaItemsData = () =>
+    getAtinaData("api/AtinaItems/search?filter=aufeld");
   //PUT
   const putUserData = (info) => putAtinaData("AtinaUsers", info);
-  return { getUsersData, getMobileBookingsData, getNfcTagsData, putUserData };
+  return {
+    getUsersData,
+    getMobileBookingsData,
+    getNfcTagsData,
+    getAtinaItemsData,
+    putUserData,
+  };
 };
 
 export default useAtinaCalls;

@@ -176,7 +176,7 @@ const BookingsFilter = ({
           </Grid>
           <Grid item md={2}>
             <TextField
-              onChange={handleChange}
+              // onChange={handleChange}
               value={filterVal.timeFrom || ""}
               className={"date-input"}
               variant="outlined"
@@ -185,6 +185,7 @@ const BookingsFilter = ({
               label="Datum-Uhrzeit (von)"
               name="timeFrom"
               sx={{ width: "100%", cursor: "pointer" }}
+              onChange={(e) => console.log(new Date(e.target.value).getTime())}
               inputProps={{
                 sx: {
                   "&::-webkit-datetime-edit-year-field": {
@@ -268,7 +269,7 @@ const BookingsFilter = ({
           <Grid item md={2}>
             <TextField
               onChange={handleChange}
-              value={filterVal.street || ""}
+              value={filterVal.streetNumber || ""}
               variant="outlined"
               size="small"
               label="Hausnummer"

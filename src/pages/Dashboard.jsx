@@ -25,6 +25,7 @@ import logo from "../assets/attensam-logo.svg";
 import { Button, Paper, Tooltip, Typography } from "@mui/material";
 import ErrorModal from "../components/modals/ErrorModal";
 import Loading from "../components/Loading";
+import TapAndPlayOutlinedIcon from "@mui/icons-material/TapAndPlayOutlined";
 
 const drawerWidth = 240;
 
@@ -127,6 +128,11 @@ export default function Dashboard() {
       text: "NFC Tags",
       icon: <NfcIcon />,
       nav: "nfc",
+    },
+    {
+      text: "Datensätze",
+      icon: <TapAndPlayOutlinedIcon />,
+      nav: "items",
     },
     {
       text: "Einstellungen",

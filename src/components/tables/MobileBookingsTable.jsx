@@ -121,6 +121,7 @@ const MobileBookingsTable = () => {
     handlePagination();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, rowsPerPage, mobileBookings]);
+  // console.log(mobileBookings[0]);
 
   return (
     <Box

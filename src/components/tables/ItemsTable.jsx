@@ -61,17 +61,17 @@ const tableColumns = [
   "daten 10",
 ];
 
-const NfcTable = () => {
-  const { nfcTags } = useSelector((state) => state.atina);
-  const { getNfcTagsData } = useAtinaCalls();
-
+const ItemsTable = () => {
+  const { atinaItems } = useSelector((state) => state.atina);
+  const { getAtinaItemsData } = useAtinaCalls();
+  console.log(atinaItems);
   // ===pagination states START===
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [shownData, setShownData] = useState(nfcTags);
+  const [shownData, setShownData] = useState(atinaItems);
   const handlePagination = () => {
     let currentPage = rowsPerPage * page;
-    const newArray = nfcTags?.slice(currentPage, currentPage + rowsPerPage);
+    const newArray = atinaItems?.slice(currentPage, currentPage + rowsPerPage);
     return setShownData(newArray);
   };
   // ===pagination states END===
@@ -95,14 +95,15 @@ const NfcTable = () => {
   const xxl = useMediaQuery("(min-width:1500px)");
 
   useEffect(() => {
-    getNfcTagsData();
+    getAtinaItemsData();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     handlePagination();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, rowsPerPage, nfcTags]);
+  }, [page, rowsPerPage, atinaItems]);
 
   return (
     <>
@@ -128,7 +129,7 @@ const NfcTable = () => {
             setSelectedColumns={setSelectedColumns}
           />
           <Pagination
-            data={nfcTags}
+            data={atinaItems}
             page={page}
             setPage={setPage}
             rowsPerPage={rowsPerPage}
@@ -139,9 +140,6 @@ const NfcTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {/*  <TableCell sx={tableStyle.th.cell} align="left">
-                ID
-              </TableCell> */}
               {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}
@@ -150,12 +148,10 @@ const NfcTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {shownData?.map((tag) => {
-              const { item } = tag;
-
+            {shownData?.map((item) => {
               return (
                 <TableRow
-                  key={item.id}
+                  key={item.ItemNumber}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     "&:hover": { backgroundColor: "#ddd" },
@@ -163,94 +159,94 @@ const NfcTable = () => {
                 >
                   {selectedColumns.includes("typ") && (
                     <TableCell sx={tableStyle.tr.cell} align="left" scope="row">
-                      {item?.itemType === "Order" && "Auftrag"}
+                      {item?.ItemType === "Order" && "Auftrag"}
                       {item?.itemType === "Meter" && "Zähler"}
                       {item?.itemType === "Car" && "KFZ"}
                     </TableCell>
                   )}
                   {selectedColumns.includes("artikelnummer") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.itemNumber}
+                      {item?.ItemNumber}
                     </TableCell>
                   )}
 
                   {selectedColumns.includes("straße") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.street}
+                      {item?.Street}
                     </TableCell>
                   )}
                   {selectedColumns.includes("hausnummer") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.streetnumber}
+                      {item?.Streetnumber}
                     </TableCell>
                   )}
                   {selectedColumns.includes("plz") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.zip}
+                      {item?.Zip}
                     </TableCell>
                   )}
                   {selectedColumns.includes("stadt") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.city}
+                      {item?.City}
                     </TableCell>
                   )}
                   {selectedColumns.includes("land") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.country}
+                      {item?.Country}
                     </TableCell>
                   )}
 
                   {selectedColumns.includes("daten 1") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data1 ? item?.data1 : ""}
+                      {item?.Data1 ? item?.data1 : ""}
                     </TableCell>
                   )}
 
                   {selectedColumns.includes("daten 2") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data2 ? item?.data2 : ""}
+                      {item?.Data2 ? item?.data2 : ""}
                     </TableCell>
                   )}
 
                   {selectedColumns.includes("daten 3") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data3 ? item?.data3 : ""}
+                      {item?.Data3 ? item?.data3 : ""}
                     </TableCell>
                   )}
 
                   {selectedColumns.includes("daten 4") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data4 ? item?.data4 : ""}
+                      {item?.Data4 ? item?.data4 : ""}
                     </TableCell>
                   )}
                   {selectedColumns.includes("daten 5") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data5 ? item?.data5 : ""}
+                      {item?.Data5 ? item?.data5 : ""}
                     </TableCell>
                   )}
                   {selectedColumns.includes("daten 6") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data6 ? item?.data6 : ""}
+                      {item?.Data6 ? item?.data6 : ""}
                     </TableCell>
                   )}
                   {selectedColumns.includes("daten 7") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data7 ? item?.data7 : ""}
+                      {item?.Data7 ? item?.data7 : ""}
                     </TableCell>
                   )}
                   {selectedColumns.includes("daten 8") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data8 ? item?.data8 : ""}
+                      {item?.Data8 ? item?.data8 : ""}
                     </TableCell>
                   )}
                   {selectedColumns.includes("daten 9") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data9 ? item?.data9 : ""}
+                      {item?.Data9 ? item?.data9 : ""}
                     </TableCell>
                   )}
                   {selectedColumns.includes("daten 10") && (
                     <TableCell sx={tableStyle.tr.cell} align="left">
-                      {item?.data10 ? item?.data10 : ""}
+                      {item?.Data10 ? item?.data10 : ""}
                     </TableCell>
                   )}
                 </TableRow>
@@ -263,4 +259,4 @@ const NfcTable = () => {
   );
 };
 
-export default NfcTable;
+export default ItemsTable;
