@@ -150,11 +150,41 @@ const UsersTable = () => {
               {/*   <TableCell sx={tableStyle.th.cell} align="left">
                 ID
               </TableCell> */}
-              {selectedColumns.map((item, i) => (
+              {/* {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}
                 </TableCell>
-              ))}
+              ))} */}
+              {selectedColumns.includes("vorname") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  vorname
+                </TableCell>
+              )}
+              {selectedColumns.includes("nachname") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  nachname
+                </TableCell>
+              )}
+              {selectedColumns.includes("benutzername") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  benutzername
+                </TableCell>
+              )}
+              {selectedColumns.includes("kennwort") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  kennwort
+                </TableCell>
+              )}
+              {selectedColumns.includes("personalnummer") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  personalnummer
+                </TableCell>
+              )}
+              {selectedColumns.includes("bild") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  bild
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>

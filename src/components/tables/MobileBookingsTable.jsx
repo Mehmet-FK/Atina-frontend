@@ -163,11 +163,51 @@ const MobileBookingsTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {selectedColumns.map((item, i) => (
+              {/* {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}
                 </TableCell>
-              ))}
+              ))} */}
+              {selectedColumns.includes("datum") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  datum
+                </TableCell>
+              )}
+              {selectedColumns.includes("uhrzeit") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  uhrzeit
+                </TableCell>
+              )}
+              {selectedColumns.includes("buchungstyp") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  buchungstyp
+                </TableCell>
+              )}
+              {selectedColumns.includes("straße") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  straße
+                </TableCell>
+              )}
+              {selectedColumns.includes("hausnummer") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  hausnummer
+                </TableCell>
+              )}
+              {selectedColumns.includes("plz") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  plz
+                </TableCell>
+              )}
+              {selectedColumns.includes("stadt") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  stadt
+                </TableCell>
+              )}
+              {selectedColumns.includes("land") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  land
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>

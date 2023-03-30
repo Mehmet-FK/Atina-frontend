@@ -139,14 +139,96 @@ const NfcTable = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {/*  <TableCell sx={tableStyle.th.cell} align="left">
-                ID
-              </TableCell> */}
-              {selectedColumns.map((item, i) => (
+              {/* {selectedColumns.map((item, i) => (
                 <TableCell sx={tableStyle.th.cell} key={i} align="left">
                   {item}
                 </TableCell>
-              ))}
+              ))} */}
+              {selectedColumns.includes("typ") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  typ
+                </TableCell>
+              )}
+              {selectedColumns.includes("artikelnummer") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  artikelnummer
+                </TableCell>
+              )}
+              {selectedColumns.includes("straße") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  straße
+                </TableCell>
+              )}
+              {selectedColumns.includes("hausnummer") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  hausnummer
+                </TableCell>
+              )}
+              {selectedColumns.includes("plz") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  plz
+                </TableCell>
+              )}
+              {selectedColumns.includes("stadt") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  stadt
+                </TableCell>
+              )}
+              {selectedColumns.includes("land") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  land
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 1") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 1
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 2") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 2
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 3") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 3
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 4") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 4
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 5") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 5
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 6") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 6
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 7") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 7
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 8") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 8
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 9") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 9
+                </TableCell>
+              )}
+              {selectedColumns.includes("daten 10") && (
+                <TableCell sx={tableStyle.th.cell} align="left">
+                  daten 10
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
